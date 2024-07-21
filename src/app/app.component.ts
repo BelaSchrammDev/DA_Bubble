@@ -1,8 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { WorkspacemenuComponent } from './workspacemenu/workspacemenu.component';
+import { ChannelviewComponent } from './channelview/channelview.component';
+import { ThreadviewComponent } from './threadview/threadview.component';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +13,9 @@ import { WorkspacemenuComponent } from './workspacemenu/workspacemenu.component'
     CommonModule,
     RouterOutlet,
     HeaderComponent,
-    WorkspacemenuComponent
+    WorkspacemenuComponent,
+    ChannelviewComponent,
+    ThreadviewComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

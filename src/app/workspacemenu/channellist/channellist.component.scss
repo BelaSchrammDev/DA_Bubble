@@ -66,6 +66,10 @@ section {
             &:hover {
                 cursor: pointer;
                 background-color: var(--hover-bg-color);
+
+                .tag {
+                    content: url('./../../../assets/icons/tag_high.svg');
+                }
             }
         }
 

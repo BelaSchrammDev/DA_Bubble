@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ChannelService } from '../../shared/service/channel.service';
 
 @Component({
   selector: 'app-channellist',
@@ -8,16 +9,29 @@ import { Component } from '@angular/core';
   styleUrl: './channellist.component.scss'
 })
 export class ChannellistComponent {
+  public channelservice = inject(ChannelService);
   public listdropdown = true;
 
   toggleListDropdown() {
-    console.log('Toggle list dropdown');
     this.listdropdown = !this.listdropdown;
   }
 
   addChannel(event: Event) {
     event.stopPropagation();
-    console.log('Add channel');
+  }
+
+  selectChannel(event: Event) {
+    event.stopPropagation();
+  }
+
+  addchannels() {
+    this.channelservice.addChannelToFirestore({name: 'New Channel', description: 'New Channel Description'});
+    // add 5 channels
+    this.channelservice.addChannelToFirestore({name: 'Channel 1', description: 'Channel 1 Description'});
+    this.channelservice.addChannelToFirestore({name: 'Channel 2', description: 'Channel 2 Description'});
+    this.channelservice.addChannelToFirestore({name: 'Channel 3', description: 'Channel 3 Description'});
+    this.channelservice.addChannelToFirestore({name: 'Channel 4', description: 'Channel 4 Description'});
+    this.channelservice.addChannelToFirestore({name: 'Channel 5', description: 'Channel 5 Description'});
   }
 
 }

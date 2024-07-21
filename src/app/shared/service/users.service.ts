@@ -9,8 +9,9 @@ export class UsersService implements OnDestroy {
 
   private firestore = inject(Firestore);
   private unsubUsers: any;
-  public users: User[] = [];
 
+  public users: User[] = [];
+  public currentUser: User | undefined;
 
   constructor() {
     this.unsubUsers = onSnapshot(collection(this.firestore, '/users'), (snapshot) => {
@@ -45,6 +46,16 @@ export class UsersService implements OnDestroy {
     let ref = collection(this.firestore, '/users');
     let newUser = await addDoc(ref, userObj);
     await updateDoc(doc(this.firestore, '/users/' + newUser.id), { id: newUser.id });
+  }
+
+
+  getAllUsersAsIDList(): string[] {
+    return this.users.map((user) => user.id);
+  }
+
+
+  getCurrentUserID(): string {
+    return this.users[0].id;
   }
 
 

@@ -30,9 +30,30 @@ body {
 .card {
   height: calc(100% - var(--main-spacing) - var(--main-spacing) - var(--card-inner-spacing) - var(--card-inner-spacing));
   margin: var(--main-spacing);
-  padding: var(--card-inner-spacing);
   border-radius: var(--card-radius);
   background-color: var(--card-bg-color);
+}
+
+.card-content {
+  padding: var(--card-inner-spacing);
+}
+
+.card-spacing-horizonal {
+  padding-left: var(--card-inner-spacing);
+  padding-right: var(--card-inner-spacing);
+}
+
+.card-spacing-vertical {
+  padding-top: var(--card-inner-spacing);
+  padding-bottom: var(--card-inner-spacing);
+}
+
+.card-header {
+  padding: var(--card-inner-spacing);
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
+  background-color: var(--card-bg-color);
+  box-shadow: 0px 2px 10px 0px #00000014;
+  overflow: hidden;
 }
 
 // fonts definitions
