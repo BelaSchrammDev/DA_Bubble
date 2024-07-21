@@ -12,10 +12,10 @@
     <div class="channellist" [style.max-height.px]="listdropdown ? 1000 : 0">
         @for(channel of channelservice.channels; track channel.id)
         {
-            <div class="channel" (click)="selectChannel($event)">
-                <img class="tag" src="./../../../assets/icons/tag.svg" alt="">
-                <span class="nunito-18-400">{{channel.name}}</span>
-            </div>
+        <div class="channel" (click)="selectChannel($event,channel)">
+            <img class="tag" src="./../../../assets/icons/tag.svg" alt="">
+            <span class="nunito-18-400">{{channel.name}}</span>
+        </div>
         }
         <div class="addchannel">
             <img src="./../../../assets/icons/add_circle.svg" alt="">

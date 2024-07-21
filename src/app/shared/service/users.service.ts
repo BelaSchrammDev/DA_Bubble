@@ -59,6 +59,11 @@ export class UsersService implements OnDestroy {
   }
 
 
+  getUserByID(id: string): User | undefined {
+    return this.users.find((u) => u.id === id);
+  }
+
+
   setUserOnline(email: string, online: boolean): void {
     const user = this.users.find((u) => u.email === email);
     if (user) {

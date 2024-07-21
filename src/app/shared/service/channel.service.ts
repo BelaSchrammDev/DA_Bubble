@@ -14,6 +14,7 @@ export class ChannelService implements OnDestroy {
   private unsubChannels: any;
 
   public channels: Channel[] = [];
+  public currentChannelID = '';
 
   constructor() {
     this.unsubChannels = onSnapshot(collection(this.firestore, '/channels'), (snapshot) => {
@@ -32,6 +33,9 @@ export class ChannelService implements OnDestroy {
         if (change.type === 'removed') {
           this.channels = this.channels.filter((channel) => channel.id !== change.doc.data()['id']);
         }
+        if (this.currentChannelID === '' && this.channels.length > 0) {
+          this.currentChannelID = this.channels[0].id;
+        }
       });
     });
   }
@@ -47,6 +51,11 @@ export class ChannelService implements OnDestroy {
     let ref = collection(this.firestore, '/channels');
     let newChannel = await addDoc(ref, channelObj);
     await updateDoc(doc(this.firestore, '/channels/' + newChannel.id), { id: newChannel.id });
+  }
+
+
+  getChannelByID(channelID: string): Channel | undefined {
+    return this.channels.find((channel) => channel.id === channelID);
   }
 
 

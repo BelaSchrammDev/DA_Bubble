@@ -9,7 +9,7 @@
     </div>
     <div class="userlist" [style.max-height.px]="listdropdown ? 1000 : 0">
         @for(user of userservice.users; track user.id) {
-        <div class="user">
+        <div (click)="selectUser($event, user)" class="user">
             <app-userbadge [user]="user"></app-userbadge>
             <span class="name nunito-18-400">{{user.name}}</span>
         </div>

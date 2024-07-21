@@ -63,9 +63,11 @@ section {
             align-items: center;
             gap: 10px;
 
+
             &:hover {
                 cursor: pointer;
                 background-color: var(--hover-bg-color);
+                color: var(--hover-color);
 
                 .tag {
                     content: url('./../../../assets/icons/tag_high.svg');
