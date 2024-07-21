@@ -1,6 +1,15 @@
-.user {
+section {
+    height: 100dvh;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
     gap: 20px;
+
+    .main-section {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-start;
+        align-items: stretch;
+    }
 }

@@ -1,0 +1,10 @@
+section {
+    height: calc(100% - var(--main-spacing) - var(--main-spacing));
+    padding: var(--main-spacing);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: var(--main-spacing);
+}
