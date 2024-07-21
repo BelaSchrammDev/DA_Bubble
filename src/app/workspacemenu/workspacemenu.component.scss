@@ -1,6 +1,5 @@
 section {
-    height: calc(100% - var(--main-spacing) - var(--main-spacing));
-    padding: var(--main-spacing);
+    width: 350px;
 
     display: flex;
     flex-direction: column;
@@ -13,9 +12,19 @@ section {
         justify-content: center;
         align-items: center;
         gap: var(--main-spacing);
-        img {
+
+        .logo {
             width: 60px;
             height: 60px;
+        }
+
+        .name {
+            flex-grow: 1;
+        }
+
+        .edit {
+            width: 30px;
+            height: 30px;
         }
     }
 }

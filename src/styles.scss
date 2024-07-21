@@ -1,6 +1,13 @@
+// CSS Variables
+
 :root {
     --primary-bg-color: #ECEEFE;
+
     --main-spacing: 10px;
+
+    --card-radius: 30px;
+    --card-bg-color: #FFFFFF;
+    --card-inner-spacing: 20px;
 }
 
 html,
@@ -15,7 +22,21 @@ body {
     background-color: var(--primary-bg-color);
 }
 
+.card {
+  height: calc(100% - var(--main-spacing) - var(--main-spacing) - var(--card-inner-spacing) - var(--card-inner-spacing));
+  margin: var(--main-spacing);
+  padding: var(--card-inner-spacing);
+  border-radius: var(--card-radius);
+  background-color: var(--card-bg-color);
+}
+
 // fonts definitions
+
+.nunito-24-700 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+}
 
 /* nunito-200 - latin */
 @font-face {
