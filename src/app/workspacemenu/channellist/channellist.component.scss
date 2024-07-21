@@ -35,6 +35,21 @@ section {
             }
         }
 
+        &::after {
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            content: url('./../../../assets/icons/arrow_drop_down_high.svg');
+        }        
+
+        &::before {
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            content: url('./../../../assets/icons/workspaces_high.svg');
+        }        
+
+
         .add {
             &:hover {
                 border-radius: 50%;
@@ -42,6 +57,12 @@ section {
                 background-color: var(--hover-bg-color);
                 content: url('./../../../assets/icons/add_high.svg');
             }
+            &::after {
+                width: 0;
+                height: 0;
+                overflow: hidden;
+                content: url('./../../../assets/icons/add_high.svg');
+            }        
         }
     }
 
@@ -73,6 +94,13 @@ section {
                     content: url('./../../../assets/icons/tag_high.svg');
                 }
             }
+
+            &::after {
+                width: 0;
+                height: 0;
+                overflow: hidden;
+                content: url('./../../../assets/icons/tag_high.svg');
+            }        
         }
 
         .addchannel {
@@ -91,6 +119,13 @@ section {
                     content: url('./../../../assets/icons/add_circle_high.svg');
                 }
             }
+
+            &::after {
+                width: 0;
+                height: 0;
+                overflow: hidden;
+                content: url('./../../../assets/icons/add_circle_high.svg');
+            }        
         }
     }
 }
