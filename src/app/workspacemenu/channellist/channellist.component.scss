@@ -1,0 +1,90 @@
+section {
+
+    .dropdown {
+        transition: all 0.3s;
+    }
+
+    .headline {
+        cursor: pointer;
+        height: var(--card-title-height);
+        padding-bottom: var(--main-spacing);
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: var(--main-spacing);
+
+        .directmessagetitle {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: var(--main-spacing);
+        }
+
+        &:hover {
+            .directmessagetitle {
+                color: var(--hover-color);
+            }
+
+            .dropdown {
+                content: url('./../../../assets/icons/arrow_drop_down_high.svg');
+            }
+
+            .icon {
+                content: url('./../../../assets/icons/workspaces_high.svg');
+            }
+        }
+
+        .add {
+            &:hover {
+                border-radius: 50%;
+                cursor: pointer;
+                background-color: var(--hover-bg-color);
+                content: url('./../../../assets/icons/add_high.svg');
+            }
+        }
+    }
+
+    .channellist {
+        overflow: hidden;
+        transition: all 0.3s;
+        padding-left: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: flex-start;
+        align-items: stretch;
+
+        .channel {
+            padding: 4px 20px 4px 20px;
+            border-radius: 5000px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 10px;
+
+            &:hover {
+                cursor: pointer;
+                background-color: var(--hover-bg-color);
+            }
+        }
+
+        .addchannel {
+            padding-left: var(--list-intend);
+            height: var(--card-title-height);
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: var(--main-spacing);
+
+            &:hover {
+                color: var(--hover-color);
+                cursor: pointer;
+
+                img {
+                    content: url('./../../../assets/icons/add_circle_high.svg');
+                }
+            }
+        }
+    }
+}
