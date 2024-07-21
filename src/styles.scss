@@ -2,12 +2,15 @@
 
 :root {
     --primary-bg-color: #ECEEFE;
+    --hover-bg-color: #ECEEFE;
+    --hover-color: #535AF1;
 
     --main-spacing: 10px;
 
     --card-radius: 30px;
     --card-bg-color: #FFFFFF;
-    --card-inner-spacing: 20px;
+    --card-inner-spacing: 30px;
+    --card-title-height: 50px;
 }
 
 html,
@@ -32,9 +35,25 @@ body {
 
 // fonts definitions
 
+.font-bold {
+    font-weight: bold;
+}
+
 .nunito-24-700 {
     font-family: 'Nunito', sans-serif;
     font-size: 24px;
+    font-weight: 700;
+}
+
+.nunito-18-400 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.nunito-20-700 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
     font-weight: 700;
 }
 
