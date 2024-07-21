@@ -55,5 +55,9 @@ section {
                 margin-left: calc(-1 * var(--main-spacing));
             }
         }
+
+        .add-person:hover {
+            content: url('./../../../assets/icons/person_add_high.svg');
+        }
     }
 }
