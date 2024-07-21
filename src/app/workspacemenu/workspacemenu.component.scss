@@ -7,4 +7,15 @@ section {
     justify-content: flex-start;
     align-items: stretch;
     gap: var(--main-spacing);
+
+    .headline {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: var(--main-spacing);
+        img {
+            width: 60px;
+            height: 60px;
+        }
+    }
 }
