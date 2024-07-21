@@ -23,6 +23,20 @@ section {
                 content: url('./../../../assets/icons/keyboard_arrow_down_high.svg')
             }
         }
+
+        &::after {
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            content: url('./../../../assets/icons/keyboard_arrow_down_high.svg');
+        }        
+
+        &::before {
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            content: url('./../../../assets/icons/tag_high.svg');
+        }        
     }
 
     .members {
@@ -56,8 +70,19 @@ section {
             }
         }
 
-        .add-person:hover {
-            content: url('./../../../assets/icons/person_add_high.svg');
+        .add-person {
+
+            &:hover {
+                content: url('./../../../assets/icons/person_add_high.svg');
+            }
+
+            &::after {
+                width: 0;
+                height: 0;
+                overflow: hidden;
+                content: url('./../../../assets/icons/person_add_high.svg');
+            }        
+
         }
     }
 }

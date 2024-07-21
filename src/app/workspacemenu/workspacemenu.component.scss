@@ -7,6 +7,12 @@ section {
     align-items: stretch;
     gap: 25px;
 
+    .scrollfield {
+        border: 1px solid black;
+        height: 100%;
+        overflow-y: scroll;
+    }
+
     .headline {
         display: flex;
         justify-content: center;
