@@ -14,4 +14,15 @@ export class Message {
     this.emojies = data.emojies ? data.emojies : [];
     this.answerable = answerable;
   }
+
+  toJsonObject() {
+    return {
+      id: this.id,
+      creatorID: this.creatorID,
+      created: this.created,
+      content: this.content,
+      emojies: this.emojies,
+      answerable: this.answerable
+    }
+  }
 }

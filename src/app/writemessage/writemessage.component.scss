@@ -1,0 +1,97 @@
+section {
+    padding: var(--writemessage-spacing);
+    margin: var(--writemessage-spacing);
+    border-radius: var(--writemessage-spacing);
+    border: 1px solid var(--writemessage-border-color);
+
+    &:hover {
+        border: 1px solid var(--writemessage-border-color-high);
+    }
+
+    &:has(textarea:focus) {
+        border: 1px solid var(--writemessage-border-color-high);
+    }
+
+    textarea {
+        outline: none;
+        border: none;
+        resize: none;
+        width: 100%;
+        height: 100px;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+
+        .left {
+            transition: all 0.3s;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 5px;
+            filter: opacity(0.5);
+
+            &:hover {
+                cursor: pointer;
+                filter: opacity(1);
+            }
+        }
+
+        .send {
+            transition: all 0.3s;
+
+            &:hover {
+                content: url('./../../assets/icons/send_high.svg');
+            }
+
+            &::after {
+                width: 0;
+                height: 0;
+                overflow: hidden;
+                content: url('./../../assets/icons/send_high.svg');
+            }
+        }
+
+        .add {
+            &:hover {
+                content: url('./../../assets/icons/add_high.svg');
+            }
+
+            &::after {
+                width: 0;
+                height: 0;
+                overflow: hidden;
+                content: url('./../../assets/icons/add_high.svg');
+            }
+        }
+
+        .add-reaction {
+            &:hover {
+                content: url('./../../assets/icons/add_reaction_high.svg');
+            }
+
+            &::after {
+                width: 0;
+                height: 0;
+                overflow: hidden;
+                content: url('./../../assets/icons/add_reaction_high.svg');
+            }
+        }
+
+        .add-user {
+            &:hover {
+                content: url('./../../assets/icons/add_user_high.svg');
+            }
+
+            &::after {
+                width: 0;
+                height: 0;
+                overflow: hidden;
+                content: url('./../../assets/icons/add_user_high.svg');
+            }
+        }
+    }
+}

@@ -1,6 +1,10 @@
 // CSS Variables
 
 :root {
+  --writemessage-border-color: #ADB0D9;
+  --writemessage-border-color-high: #444DF2;
+  --writemessage-spacing: 20px;
+   
   --primary-bg-color: #ECEEFE;
   --hover-bg-color: #ECEEFE;
   --hover-color: #535AF1;
@@ -12,6 +16,9 @@
   --card-bg-color: #FFFFFF;
   --card-inner-spacing: 30px;
   --card-title-height: 50px;
+
+  --svg-btn-size-value: 10px;
+  --button-line-height: calc(var(--svg-btn-size-value) * 4);
 
   --list-intend: 20px;
 }
@@ -28,17 +35,31 @@ body {
   background-color: var(--primary-bg-color);
 }
 
-.svg-btn {
-  width: 24px;
-  height: 24px;
-  padding: 10px;
-  border-radius: 50%;
+.line-vertical {
+  width: 1px;
+  height: calc(var(--svg-btn-size-value) * 3);
+  background-color: #ADB0D9;
+}
 
+.svg-btn {
+  width: calc(var(--svg-btn-size-value) * 2);
+  height: calc(var(--svg-btn-size-value) * 2);
+  padding: var(--svg-btn-size-value);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.svg-btn-hover {
   &:hover {
     cursor: pointer;
     background-color: var(--hover-bg-color);
     color: var(--hover-color);
   }
+}
+
+.svg-btn-disabled {
+  pointer-events: none;
+  filter: grayscale(100%);
 }
 
 .card {

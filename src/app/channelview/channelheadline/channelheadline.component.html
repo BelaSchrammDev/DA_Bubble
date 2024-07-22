@@ -7,12 +7,12 @@
     <div class="members">
         <div class="memberlist">
             <div class="member3">
-                @for(user of navigationService.currentChannel?.members?.slice(0,3); track user )
+                @for(user of navigationService.currentChat?.memberIDs?.slice(0,3); track user )
                 { <app-userbadge [user]="userservice.getUserByID(user)"></app-userbadge> }
             </div>
-            <span class="nunito-18-400">{{ navigationService.currentChannel?.members?.length }}</span>
+            <span class="nunito-18-400">{{ navigationService.currentChat?.memberIDs?.length }}</span>
         </div>
-        <img class="svg-btn add-person" src="./../../../assets/icons/person_add.svg" alt="">
+        <img class="svg-btn svg-btn-hover add-person" src="./../../../assets/icons/person_add.svg" alt="">
     </div>
 
 </section>

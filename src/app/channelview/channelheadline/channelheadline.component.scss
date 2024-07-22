@@ -2,12 +2,13 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: var(--button-line-height);
 
     .name {
         display: flex;
         align-items: center;
         gap: var(--main-spacing);
-        padding: 5px 20px;
+        height: var(--button-line-height);
         border-radius: 5000px;
 
         &:hover {
@@ -64,8 +65,8 @@ section {
             flex-direction: row-reverse;
             align-items: center;
             app-userbadge {
-                height: 40px;
-                width: 40px;
+                height: calc(var(--svg-btn-size-value) * 3);
+                width: calc(var(--svg-btn-size-value) * 3);
                 margin-left: calc(-1 * var(--main-spacing));
             }
         }

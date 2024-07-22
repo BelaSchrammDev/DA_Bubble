@@ -1,1 +1,14 @@
-<p>writemessage works!</p>
+<section>
+    <textarea [(ngModel)]="messagetext" class="nunito-18-400" name="" id="" placeholder="Nachricht"></textarea>
+    <div class="actions">
+        <div class="left">
+            <img class="add svg-btn svg-btn-hover" src="./../../assets/icons/add.svg" alt="">
+            <div class="line-vertical"></div>
+            <img class="add-reaction svg-btn svg-btn-hover" src="./../../assets/icons/add_reaction.svg" alt="">
+            <img class="add-user svg-btn svg-btn-hover" src="./../../assets/icons/add_user.svg" alt="">
+        </div>
+        <div class="right">
+            <img (click)="sendMessage()" [class]="{'svg-btn-disabled': messagetext == ''}" class="send svg-btn" src="./../../assets/icons/send.svg" alt="">
+        </div>
+    </div>
+</section>
