@@ -31,13 +31,16 @@ export class ChannellistComponent {
   }
 
   addchannels() {
-    this.channelservice.addChannelToFirestore({name: 'New Channel', description: 'New Channel Description'});
-    // add 5 channels
-    this.channelservice.addChannelToFirestore({name: 'Channel 1', description: 'Channel 1 Description'});
-    this.channelservice.addChannelToFirestore({name: 'Channel 2', description: 'Channel 2 Description'});
-    this.channelservice.addChannelToFirestore({name: 'Channel 3', description: 'Channel 3 Description'});
-    this.channelservice.addChannelToFirestore({name: 'Channel 4', description: 'Channel 4 Description'});
-    this.channelservice.addChannelToFirestore({name: 'Channel 5', description: 'Channel 5 Description'});
+    const defaultChannels = [
+      {name: 'General', description: 'General Channel'},
+      {name: 'Random', description: 'Random Channel'},
+      {name: 'News', description: 'News Channel'},
+      {name: 'Tech', description: 'Tech Channel'},
+      {name: 'Music', description: 'Music Channel'}
+    ];
+    defaultChannels.forEach(channel => {
+      this.channelservice.addChannelToFirestore(channel);
+    });
   }
 
 }

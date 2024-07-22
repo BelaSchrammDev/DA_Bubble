@@ -1,8 +1,8 @@
 section {
     width: 100%;
-    height: fit-content;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    height: var(--header-height);
+    padding-top: var(--main-spacing);
+    padding-bottom: var(--main-spacing);
 
     display: flex;
     justify-content: space-between;

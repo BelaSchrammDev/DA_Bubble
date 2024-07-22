@@ -40,17 +40,29 @@ export class ChannelService implements OnDestroy {
     });
   }
 
-  async addChannelToFirestore(channel: any) {
+  async addChannelToFirestore(newchannel: any) {
     const channelObj = {
-      name: channel.name,
-      description: channel.description,
+      name: newchannel.name,
+      description: newchannel.description,
       created: Date.now(),
-      creator: this.userservice.getCurrentUserID(),
-      members: channel.members ? channel.members : this.userservice.getAllUsersAsIDList(),
+      creatorID: this.userservice.getCurrentUserID(),
+      chatID: await this.addNewChatToFirestore(newchannel.memberIDs ? newchannel.memberIDs : this.userservice.getAllUsersAsIDList()),
     };
     let ref = collection(this.firestore, '/channels');
     let newChannel = await addDoc(ref, channelObj);
     await updateDoc(doc(this.firestore, '/channels/' + newChannel.id), { id: newChannel.id });
+  }
+
+
+  async addNewChatToFirestore(memberIDs: string[]) {
+    const chatObj = {
+      memberIDs: memberIDs,
+      messageIDs: []
+    };
+    let ref = collection(this.firestore, '/chats');
+    let newChat = await addDoc(ref, chatObj);
+    await updateDoc(doc(this.firestore, '/chats/' + newChat.id), { id: newChat.id });
+    return newChat.id;
   }
 
 

@@ -28,4 +28,18 @@ export class UserlistComponent {
     event.stopPropagation();
   }
 
+  addDefaultUsers() {
+    const defaultUsers = [
+      { name: 'John Doe', email: 'john@gmail.com', avatar: 1, password: '123' },
+      { name: 'Jane Doe', email: 'jane@gmail.com', avatar: 2, password: '123' },
+      { name: 'Alice', email: 'alice@gmail.com', avatar: 3, password: '123' },
+      { name: 'Bob', email: 'bob@gmail.com', avatar: 4, password: '123' },
+      { name: 'Charlie', email: 'charlie@gmail.com', avatar: 5, password: '123' },
+      { name: 'David', email: 'david@aol.de', avatar: 1, password: '123' },
+      { name: 'Eve', email: 'eve@online.dev', avatar: 2, password: '123' },
+    ];
+    defaultUsers.forEach(user => {
+      this.userservice.addUserToFirestore(user, user.password);
+    });
+  }
 }

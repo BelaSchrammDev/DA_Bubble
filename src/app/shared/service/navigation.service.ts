@@ -3,6 +3,7 @@ import { ChannelService } from './channel.service';
 import { UsersService } from './users.service';
 import { Channel } from '../models/channel.model';
 import { User } from '../models/user.model';
+import { Chat } from '../models/chat.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,10 +30,11 @@ export class NavigationService {
     }
     return this._currentChannel;
   }
-
   public set currentChannel(value: Channel | undefined) {
     this._currentChannel = value;
   }
+
+  public currentChat: Chat | undefined;
   public privateMessage = false;
 
   public get currentChannelID(): string | undefined {
