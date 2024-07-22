@@ -14,9 +14,9 @@ export class NavigationService {
   private firestore = inject(Firestore);
   private channelservice = inject(ChannelService);
   private usersservice = inject(UsersService);
-  private _currentChannelID = '';
 
-
+  
+  
   private _currentUser: User | undefined;
   public get currentUser(): User | undefined {
     return this._currentUser;
@@ -24,7 +24,9 @@ export class NavigationService {
   public set currentUser(value: User | undefined) {
     this._currentUser = value;
   }
+  
 
+  private _currentChannelID = '';
   private _currentChannel: Channel | undefined;
   public get currentChannel(): Channel | undefined {
     if (this._currentChannelID === '') {
@@ -36,7 +38,6 @@ export class NavigationService {
     this._currentChannel = value;
   }
 
-  public currentChat: Chat | undefined;
   public privateMessage = false;
 
   public get currentChannelID(): string | undefined {
@@ -47,12 +48,6 @@ export class NavigationService {
     this.currentChannel = this.channelservice.getChannelByID(channelID);
     this._currentChannelID = channelID;
     this.privateMessage = false;
-    if (this._currentChannel) {
-      this.setCurrentChat(this._currentChannel.chatID);
-    }
-    else {
-      this.currentChat = undefined;
-    }
   }
 
   setCurrentUser(userID: string) {
@@ -61,8 +56,4 @@ export class NavigationService {
     this.privateMessage = true;
   }
 
-  async setCurrentChat(chatID: string) {
-    let chatDoc = await getDoc(doc(this.firestore, 'chats', chatID));
-    this.currentChat = new Chat(chatDoc.data());
-  }
 }

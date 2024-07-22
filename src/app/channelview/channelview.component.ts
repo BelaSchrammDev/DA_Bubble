@@ -5,6 +5,8 @@ import { UsersService } from '../shared/service/users.service';
 import { PrivatmessageheadlineComponent } from './privatmessageheadline/privatmessageheadline.component';
 import { ChannelheadlineComponent } from './channelheadline/channelheadline.component';
 import { NavigationService } from '../shared/service/navigation.service';
+import { ChatviewComponent } from '../chatview/chatview.component';
+import { ChatService } from '../shared/service/chat.service';
 
 @Component({
   selector: 'app-channelview',
@@ -12,7 +14,8 @@ import { NavigationService } from '../shared/service/navigation.service';
   imports: [
     WritemessageComponent,
     PrivatmessageheadlineComponent,
-    ChannelheadlineComponent
+    ChannelheadlineComponent,
+    ChatviewComponent
   ],
   templateUrl: './channelview.component.html',
   styleUrl: './channelview.component.scss'
@@ -20,6 +23,7 @@ import { NavigationService } from '../shared/service/navigation.service';
 export class ChannelviewComponent {
   public channelservice = inject(ChannelService);
   public userservice = inject(UsersService);
+  public chatservice = inject(ChatService);
   public navigationService = inject(NavigationService);
 
 }

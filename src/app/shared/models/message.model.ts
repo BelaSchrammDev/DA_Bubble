@@ -6,7 +6,7 @@ export class Message {
   emojies: string[];
   answerable: boolean;
 
-  constructor(data: any, answerable: boolean) {
+  constructor(data: any, answerable: boolean = false) {
     this.id = data.id ? data.id : '';
     this.creatorID = data.creatorID ? data.creatorID : '';
     this.created = data.created ? data.created : Date.now();

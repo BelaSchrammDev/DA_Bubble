@@ -26,19 +26,21 @@ export class WritemessageComponent {
     if (this.chat) {
       this.sending = true;
       let newMessage = this.createNewMessageObject();
-      await this.addMessageToFirestore(newMessage);
-      await this.addMessageIDToChat(newMessage.id);
+      await this.addChatMessageToFirestore(newMessage);
       this.sending = false;
       this.messagetext = '';
     }
   }
 
 
-  async addMessageToFirestore(message: Message) {
-    let ref = collection(this.firestore, 'messages');
-    let newMessageRef = await addDoc(ref, message.toJsonObject());
-    await updateDoc(doc(this.firestore, '/messages/' + newMessageRef.id), { id: newMessageRef.id });
-    message.id = newMessageRef.id;
+  async addChatMessageToFirestore(message: Message) {
+    if (this.chat) {
+      const messagesPath = '/chats/' + this.chat.id + '/messages/';
+      let ref = collection(this.firestore, messagesPath);
+      let newMessageRef = await addDoc(ref, message.toJsonObject());
+      await updateDoc(doc(this.firestore, messagesPath + newMessageRef.id), { id: newMessageRef.id });
+      message.id = newMessageRef.id;
+    }
   }
 
 
@@ -48,14 +50,5 @@ export class WritemessageComponent {
       content: this.messagetext
     }, false);
     return newMessage;
-  }
-
-
-  async addMessageIDToChat(messageID: string) {
-    if(this.chat) {
-      let ref = doc(this.firestore, '/chats/' + this.chat.id);
-      await updateDoc(ref, { messageIDs: [...this.chat.messageIDs, messageID] });
-      this.chat.messageIDs.push(messageID);
-    }
   }
 }

@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ChannelService } from '../../shared/service/channel.service';
 import { NavigationService } from '../../shared/service/navigation.service';
 import { Channel } from '../../shared/models/channel.model';
+import { ChatService } from '../../shared/service/chat.service';
 
 @Component({
   selector: 'app-channellist',
@@ -13,6 +14,7 @@ import { Channel } from '../../shared/models/channel.model';
 export class ChannellistComponent {
 
   private navigationService = inject(NavigationService);
+  private chatservice = inject(ChatService);
 
   public channelservice = inject(ChannelService);
   public listdropdown = true;
@@ -28,6 +30,7 @@ export class ChannellistComponent {
   selectChannel(event: Event, channel: Channel) {
     event.stopPropagation();
     this.navigationService.setCurrentChannel(channel.id);
+    this.chatservice.setChatID(channel.chatID);
   }
 
   addchannels() {

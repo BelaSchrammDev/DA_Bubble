@@ -1,0 +1,7 @@
+<section>
+    <span>{{ messageList.length }}</span>
+    @for(message of messageList; track message.id) {
+    <div class="message">
+        <span>{{ message.content }}</span>
+    </div>}
+</section>

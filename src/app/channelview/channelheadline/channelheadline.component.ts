@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { NavigationService } from '../../shared/service/navigation.service';
 import { UsersService } from '../../shared/service/users.service';
 import { UserbadgeComponent } from '../../users/userbadge/userbadge.component';
+import { ChatService } from '../../shared/service/chat.service';
 
 @Component({
   selector: 'app-channelheadline',
@@ -16,5 +17,6 @@ export class ChannelheadlineComponent {
 
   public navigationService = inject(NavigationService);
   public userservice = inject(UsersService);
+  public chatservice = inject(ChatService);
 
 }
