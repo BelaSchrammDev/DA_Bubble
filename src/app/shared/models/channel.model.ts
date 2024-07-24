@@ -1,12 +1,11 @@
-import { Chat } from "./chat.model";
-import { Message } from "./message.model";
+import { serverTimestamp } from "@angular/fire/firestore";
 
 export class Channel {
 
   id: string;
   name: string; // unique!!! 
   description: string;
-  created: number;
+  createdAt: Date;
   creatorID: string; // User id
   chatID: string; // Chat id
 
@@ -14,7 +13,7 @@ export class Channel {
     this.id = data.id ? data.id : '';
     this.name = data.name ? data.name : 'New Channel';
     this.description = data.description ? data.description : '';
-    this.created = data.created ? data.created : Date.now();
+    this.createdAt = data.createdAt ? (data.createdAt as any).toDate() : serverTimestamp();
     this.creatorID = data.creatorID ? data.creatorID : '';
     this.chatID = data.chatID ? data.chatID : '';
   }

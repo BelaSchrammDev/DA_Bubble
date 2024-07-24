@@ -1,0 +1,25 @@
+<section>
+    @if(message) {
+    <div [ngClass]="userservice.currentUser == user ? 'message-self' : 'message-other'" class="message">
+        <app-userbadge [user]="user"></app-userbadge>
+        <div class="message-content">
+            @if(user) {
+            <div [ngClass]="userservice.currentUser == user ? 'message-self' : 'message-other'"
+                class="message-name-time">
+                <span class="nunito-18-700">{{ user.name }}</span>
+                <span class="nunito-14-400 time">{{ message.createdAt.getHours() }}:{{ message.createdAt.getMinutes() }}
+                    Uhr</span>
+            </div>
+            }
+            <div [ngClass]="userservice.currentUser == user ? 'message-self' : 'message-other'" class="message-text-wrapper">
+                <div [ngClass]="userservice.currentUser == user ? 'message-text-right' : 'message-text-left'"
+                    class="nunitp-18-400 message-text">{{ message.content }}</div>
+            </div>
+            <div [ngClass]="userservice.currentUser == user ? 'message-self' : 'message-other'" class="message-answers">
+                <span class="nunito-18-400 answercount">2 Antworten</span>
+                <span class="nunito-14-400 lastanswer">Letzte Antwort 21:21 Uhr</span>
+            </div>
+        </div>
+    </div>
+    }
+</section>

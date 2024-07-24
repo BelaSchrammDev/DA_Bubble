@@ -6,6 +6,7 @@ section {
     gap: var(--main-spacing);
 
     .messagelist {
-        flex-grow: 1;
+        overflow-y: auto;
+        min-height: var(--card-chatview-height);
     }
 }

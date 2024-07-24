@@ -12,7 +12,8 @@
         @for(user of userservice.users; track user.id) {
         <div (click)="selectUser($event, user)" class="user">
             <app-userbadge [user]="user"></app-userbadge>
-            <span class="name nunito-18-400">{{user.name}}</span>
+            <span class="name nunito-18-400">{{user.name}} {{ userservice.currentUser == user ? '(Du)' : '' }}</span>
+            <button (click)="userservice.currentUser=user">*</button>
         </div>
         }
     </div>

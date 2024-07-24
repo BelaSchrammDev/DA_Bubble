@@ -1,7 +1,10 @@
 <section>
-    <span>{{ messageList.length }}</span>
-    @for(message of messageList; track message.id) {
-    <div class="message">
-        <span>{{ message.content }}</span>
-    </div>}
+    @for(messageItem of renderItems; track messageItem) {
+    @if(ifMessage(messageItem)) {
+    <app-rendermessage [message]="getMessage(messageItem)"></app-rendermessage>
+    }
+    @else {
+        <span>--------------------{{ getString(messageItem) }}---------------------</span>
+    }
+    }
 </section>

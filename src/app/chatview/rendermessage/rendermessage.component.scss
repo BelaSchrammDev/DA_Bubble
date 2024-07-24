@@ -1,0 +1,81 @@
+section {
+
+    .message {
+        display: flex;
+        justify-content: flex-start;
+        gap: var(--main-spacing);
+
+        padding: var(--main-spacing) var(--card-inner-spacing);
+
+        .message-name-time {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: var(--main-spacing);
+        }
+
+        .time {
+            color: #686868;
+        }
+
+        .message-text-left {
+            border-radius: 0 30px 30px 30px;
+        }
+
+        .message-text-right {
+            border-radius: 30px 0 30px 30px;
+        }
+
+        .message-text {
+            background-color: #797EF3;
+            color: white;
+            padding: var(--main-spacing);
+        }
+
+        .message-text-wrapper {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .message-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: var(--main-spacing);
+        }
+
+        .message-answers {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: var(--main-spacing);
+        }
+
+        .answercount {
+            color: #535AF1;
+        }
+
+        .lastanswer {
+            color: black;
+        }
+
+        &:hover {
+            cursor: pointer;
+            background-color: #ECEEFE;
+
+            .message-text {
+                background-color: white;
+                color: black;
+            }
+        }
+    }
+
+    .message-self {
+        flex-direction: row-reverse;
+    }
+
+    .message-other {
+        flex-direction: row;
+    }
+}

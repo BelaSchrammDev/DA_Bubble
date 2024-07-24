@@ -1,7 +1,9 @@
+import { serverTimestamp } from "@angular/fire/firestore";
+
 export class Message {
   id: string;
   creatorID: string;
-  created: number;
+  createdAt: Date;
   content: string;
   emojies: string[];
   answerable: boolean;
@@ -9,7 +11,7 @@ export class Message {
   constructor(data: any, answerable: boolean = false) {
     this.id = data.id ? data.id : '';
     this.creatorID = data.creatorID ? data.creatorID : '';
-    this.created = data.created ? data.created : Date.now();
+    this.createdAt = data.createdAt ? (data.createdAt as any).toDate() : serverTimestamp();
     this.content = data.content ? data.content : '';
     this.emojies = data.emojies ? data.emojies : [];
     this.answerable = answerable;
@@ -19,7 +21,7 @@ export class Message {
     return {
       id: this.id,
       creatorID: this.creatorID,
-      created: this.created,
+      createdAt: this.createdAt,
       content: this.content,
       emojies: this.emojies,
       answerable: this.answerable

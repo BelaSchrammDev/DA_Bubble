@@ -16,9 +16,13 @@
   --card-bg-color: #FFFFFF;
   --card-inner-spacing: 30px;
   --card-title-height: 50px;
+  --card-height: calc(100% - var(--main-spacing) - var(--main-spacing) - var(--card-inner-spacing) - var(--card-inner-spacing));
+  --card-multi-height: calc(100% - var(--main-spacing) - var(--main-spacing));
+  --card-chatview-height: calc(var(--card-multi-height) - var(--writemessage-height) - var(--button-line-height) - calc(var(--writemessage-spacing) * 7));
 
   --svg-btn-size-value: 10px;
   --button-line-height: calc(var(--svg-btn-size-value) * 4);
+  --writemessage-height: calc(var(--button-line-height) * 4);
 
   --list-intend: 20px;
 }
@@ -63,14 +67,14 @@ body {
 }
 
 .card {
-  height: calc(100% - var(--main-spacing) - var(--main-spacing) - var(--card-inner-spacing) - var(--card-inner-spacing));
+  height: var(--card-height);
   margin: var(--main-spacing);
   border-radius: var(--card-radius);
   background-color: var(--card-bg-color);
 }
 
 .card-multi {
-  height: calc(100% - var(--main-spacing) - var(--main-spacing));
+  height: var(--card-multi-height);
   margin: var(--main-spacing);
   border-radius: var(--card-radius);
   background-color: var(--card-bg-color);
@@ -114,6 +118,18 @@ body {
   font-family: 'Nunito', sans-serif;
   font-size: 18px;
   font-weight: 400;
+}
+
+.nunito-14-400 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.nunito-18-700 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .nunito-20-700 {

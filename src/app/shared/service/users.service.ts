@@ -55,7 +55,7 @@ export class UsersService implements OnDestroy {
 
 
   getCurrentUserID(): string {
-    return this.users[0].id;
+    return this.currentUser ? this.currentUser.id : this.users[0].id;
   }
 
 

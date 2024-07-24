@@ -1,8 +1,15 @@
 section {
+    height: var(--writemessage-height);
+
     padding: var(--writemessage-spacing);
     margin: var(--writemessage-spacing);
     border-radius: var(--writemessage-spacing);
     border: 1px solid var(--writemessage-border-color);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: stretch;
 
     &:hover {
         border: 1px solid var(--writemessage-border-color-high);
@@ -13,11 +20,12 @@ section {
     }
 
     textarea {
+        flex-grow: 1;
         outline: none;
         border: none;
         resize: none;
         width: 100%;
-        height: 100px;
+        height: 100%;
     }
 
     .actions {
