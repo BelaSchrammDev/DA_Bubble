@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { UserbadgeComponent } from '../../users/userbadge/userbadge.component';
+import { UserbadgeComponent } from "../../shared/components/userbadge/userbadge.component";
 import { NavigationService } from '../../shared/service/navigation.service';
 import { User } from '../../shared/models/user.model';
 

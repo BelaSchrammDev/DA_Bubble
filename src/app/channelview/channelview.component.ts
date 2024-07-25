@@ -1,5 +1,4 @@
 import { Component, inject, Input } from '@angular/core';
-import { WritemessageComponent } from '../writemessage/writemessage.component';
 import { ChannelService } from '../shared/service/channel.service';
 import { UsersService } from '../shared/service/users.service';
 import { PrivatmessageheadlineComponent } from './privatmessageheadline/privatmessageheadline.component';
@@ -7,6 +6,7 @@ import { ChannelheadlineComponent } from './channelheadline/channelheadline.comp
 import { NavigationService } from '../shared/service/navigation.service';
 import { ChatviewComponent } from '../chatview/chatview.component';
 import { ChatService } from '../shared/service/chat.service';
+import { WritemessageComponent } from '../shared/components/writemessage/writemessage.component';
 
 @Component({
   selector: 'app-channelview',

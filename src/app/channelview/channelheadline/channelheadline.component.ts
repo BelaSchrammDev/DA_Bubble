@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NavigationService } from '../../shared/service/navigation.service';
 import { UsersService } from '../../shared/service/users.service';
-import { UserbadgeComponent } from '../../users/userbadge/userbadge.component';
+import { UserbadgeComponent } from "../../shared/components/userbadge/userbadge.component";
 import { ChatService } from '../../shared/service/chat.service';
 
 @Component({

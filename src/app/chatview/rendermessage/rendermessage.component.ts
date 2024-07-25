@@ -1,9 +1,10 @@
 import { Component, inject, Input } from '@angular/core';
 import { Message } from '../../shared/models/message.model';
-import { UserbadgeComponent } from "../../users/userbadge/userbadge.component";
+import { UserbadgeComponent } from "../../shared/components/userbadge/userbadge.component";
 import { UsersService } from '../../shared/service/users.service';
 import { User } from '../../shared/models/user.model';
 import { CommonModule } from '@angular/common';
+import { NavigationService } from '../../shared/service/navigation.service';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { CommonModule } from '@angular/common';
 })
 export class RendermessageComponent {
 
+  private navigationService = inject(NavigationService);
   public userservice = inject(UsersService);
   public user: User | undefined;
 
@@ -30,4 +32,17 @@ export class RendermessageComponent {
     return this._message;
     }
 
+
+    getCreatedAtTimeAsString(): string {
+      if (this._message) {
+        return this._message.createdAt.getHours() + ':' + this._message.createdAt.getMinutes();
+      }
+      return '';
+    }
+
+    selectThread() {
+      if (this._message) {
+        this.navigationService.setCurrentThread(this._message);
+      }
+    }
 }

@@ -3,10 +3,10 @@ section {
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
-    gap: var(--main-spacing);
 
     .messagelist {
         overflow-y: auto;
         min-height: var(--card-chatview-height);
+        max-height: var(--card-chatview-height);
     }
 }

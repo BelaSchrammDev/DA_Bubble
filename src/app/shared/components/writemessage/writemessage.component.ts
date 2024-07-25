@@ -1,9 +1,9 @@
 import { Component, inject, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { addDoc, collection, doc, Firestore, updateDoc } from '@angular/fire/firestore';
-import { Message } from '../shared/models/message.model';
-import { UsersService } from '../shared/service/users.service';
-import { Chat } from '../shared/models/chat.model';
+import { Message } from '../../models/message.model';
+import { UsersService } from '../../service/users.service';
+import { Chat } from '../../models/chat.model';
 
 @Component({
   selector: 'app-writemessage',

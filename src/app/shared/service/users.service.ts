@@ -18,6 +18,10 @@ export class UsersService implements OnDestroy {
       snapshot.docChanges().forEach((change) => {
         if (change.type === 'added') {
           this.users.push(new User(change.doc.data()));
+          // debug initial:
+          if(this.currentUser === undefined) {
+            this.currentUser = this.users[0];
+          }
         }
         if (change.type === 'modified') {
           this.users = this.users.map((user) => {

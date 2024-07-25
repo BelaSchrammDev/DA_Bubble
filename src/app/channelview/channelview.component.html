@@ -7,8 +7,8 @@
             <app-channelheadline></app-channelheadline>
         }
     </div>
-    <div class="messagelist">
+    <div class="messagelist bubble-scrollbar">
         <app-chatview [chat]="chatservice.chat"></app-chatview>
     </div>
-    <app-writemessage [chat]="chatservice.chat"></app-writemessage>
+    <app-writemessage class="card-footer" [chat]="chatservice.chat"></app-writemessage>
 </section>

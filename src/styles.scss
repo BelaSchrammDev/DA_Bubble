@@ -4,7 +4,7 @@
   --writemessage-border-color: #ADB0D9;
   --writemessage-border-color-high: #444DF2;
   --writemessage-spacing: 20px;
-   
+
   --primary-bg-color: #ECEEFE;
   --hover-bg-color: #ECEEFE;
   --hover-color: #535AF1;
@@ -18,13 +18,17 @@
   --card-title-height: 50px;
   --card-height: calc(100% - var(--main-spacing) - var(--main-spacing) - var(--card-inner-spacing) - var(--card-inner-spacing));
   --card-multi-height: calc(100% - var(--main-spacing) - var(--main-spacing));
-  --card-chatview-height: calc(var(--card-multi-height) - var(--writemessage-height) - var(--button-line-height) - calc(var(--writemessage-spacing) * 7));
+  --card-header-height: calc(var(--button-line-height) + var(--card-inner-spacing) + var(--card-inner-spacing));
+  --card-footer-height: calc(var(--writemessage-height) + calc(var(--writemessage-spacing) * 4));
+  --card-chatview-height: calc(var(--card-multi-height) - var(--card-footer-height) - var(--card-header-height) + var(--main-spacing) + var(--main-spacing));
 
   --svg-btn-size-value: 10px;
   --button-line-height: calc(var(--svg-btn-size-value) * 4);
   --writemessage-height: calc(var(--button-line-height) * 4);
 
   --list-intend: 20px;
+
+  --thread-view-width: 350px;
 }
 
 html,
@@ -78,6 +82,7 @@ body {
   margin: var(--main-spacing);
   border-radius: var(--card-radius);
   background-color: var(--card-bg-color);
+  overflow: hidden;
 }
 
 .card-content {
@@ -101,6 +106,32 @@ body {
   box-shadow: 0px 2px 10px 0px #00000014;
   overflow: hidden;
 }
+
+.card-footer {
+  box-shadow: 0 0 20px 2px #00000014;
+}
+
+// custom scrollbar
+
+.bubble-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.bubble-scrollbar::-webkit-scrollbar-track {
+  border-radius: 1000px;
+  background: var(--card-bg-color);
+}
+
+.bubble-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 1000px;
+  background: var(--writemessage-border-color-high);
+}
+
+.bubble-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--hover-color);
+}
+
+
 
 // fonts definitions
 

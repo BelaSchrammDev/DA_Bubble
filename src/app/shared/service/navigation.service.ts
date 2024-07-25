@@ -3,56 +3,35 @@ import { ChannelService } from './channel.service';
 import { UsersService } from './users.service';
 import { Channel } from '../models/channel.model';
 import { User } from '../models/user.model';
-import { Chat } from '../models/chat.model';
-import { collection, doc, Firestore, getDoc } from '@angular/fire/firestore';
+import { Message } from '../models/message.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NavigationService {
 
-  private firestore = inject(Firestore);
   private channelservice = inject(ChannelService);
   private usersservice = inject(UsersService);
 
-  
-  
-  private _currentUser: User | undefined;
-  public get currentUser(): User | undefined {
-    return this._currentUser;
-  }
-  public set currentUser(value: User | undefined) {
-    this._currentUser = value;
-  }
-  
-
-  private _currentChannelID = '';
-  private _currentChannel: Channel | undefined;
-  public get currentChannel(): Channel | undefined {
-    if (this._currentChannelID === '') {
-      this.setCurrentChannel(this.channelservice.currentChannelID);
-    }
-    return this._currentChannel;
-  }
-  public set currentChannel(value: Channel | undefined) {
-    this._currentChannel = value;
-  }
-
   public privateMessage = false;
+  public currentUser: User | undefined;
+  public currentChannel: Channel | undefined;
+  public currentThread: Message | undefined;
 
-  public get currentChannelID(): string | undefined {
-    return this._currentChannelID;
+
+  setCurrentThread(message: Message) {
+    this.currentThread = message;
   }
 
+  
   setCurrentChannel(channelID: string) {
     this.currentChannel = this.channelservice.getChannelByID(channelID);
-    this._currentChannelID = channelID;
     this.privateMessage = false;
   }
 
+
   setCurrentUser(userID: string) {
     this.currentUser = this.usersservice.getUserByID(userID);
-    this._currentChannelID = userID;
     this.privateMessage = true;
   }
 

@@ -1,4 +1,19 @@
 section {
     overflow: hidden;
     max-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    transition: max-width 0.5s;
+
+    .messagelist {
+        overflow-y: auto;
+        min-height: var(--card-chatview-height);
+        max-height: var(--card-chatview-height);
+    }
+}
+
+.show-threadview {
+    max-width: var(--thread-view-width);
 }

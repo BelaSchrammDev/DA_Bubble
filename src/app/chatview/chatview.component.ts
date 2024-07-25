@@ -18,7 +18,6 @@ export class ChatviewComponent implements OnDestroy, OnChanges {
   }
 
   public messageList: Message[] = [];
-  public renderItems: (Message | string)[] = [];
   public loading = true;
 
   private firestore = inject(Firestore);
@@ -35,23 +34,45 @@ export class ChatviewComponent implements OnDestroy, OnChanges {
     this._chat = value;
     this.unSubscribeChatMessages();
     this.messageList = [];
-    this.renderItems = [];
     this.subscribeChatMessages();
   }
 
 
-  ifMessage(item: Message | string): boolean {
-    return typeof item !== 'string';
+  ifDaySeparatorNeeded(index: number): boolean {
+    if (index === 0) {
+      return true;
+    }
+    if (index > 0) {
+      let currentMessage = this.messageList[index];
+      let previousMessage = this.messageList[index - 1];
+      return currentMessage.createdAt.getDate() !== previousMessage.createdAt.getDate();
+    }
+    return false;
   }
 
 
-  getString(item: Message | string): string | undefined {
-    return typeof item === 'string' ? item : undefined;
+  getDaySeparatorText(index: number): string {
+    let message = this.messageList[index];
+    let date = message.createdAt;
+    let day = date.getDate();
+    let month = date.getMonth();
+    let year = date.getFullYear();
+    if (day === new Date().getDate() && month === new Date().getMonth() && year === new Date().getFullYear()) {
+      return 'Heute';
+    }
+    return this.getWeekdayGerman(date.getDay()) + ', ' + day + '. ' + this.getMonthGerman(month) + (year === new Date().getFullYear() ? '' : ' ' + year);
   }
 
 
-  getMessage(item: Message | string): Message | undefined {
-    return typeof item !== 'string' ? (item as Message) : undefined;
+  getWeekdayGerman(weekdayNumber: number): string {
+    const weekday = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
+    return weekday[weekdayNumber];
+  }
+
+
+  getMonthGerman(monthNumber: number): string {
+    const month = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+    return month[monthNumber];
   }
 
 
@@ -60,11 +81,7 @@ export class ChatviewComponent implements OnDestroy, OnChanges {
       if (this.changes) {
         this.changes = false;
         this.messageList.sort((a, b) => { return Number(a.createdAt) - Number(b.createdAt); });
-        this.messageList.forEach((item) => {
-          if(!this.renderItems.includes(item)) this.renderItems.push(item);
-        });
         this.loading = false;
-        console.log('loading.....false');
       }
     }, 500);
   }
@@ -75,7 +92,6 @@ export class ChatviewComponent implements OnDestroy, OnChanges {
       this.unsubChatMessages = onSnapshot(collection(this.firestore, 'chats', this.chat.id, 'messages'), (snapshot) => {
         snapshot.docChanges().forEach((change) => {
           this.loading = true;
-          console.log('loading.....true');
           this.changes = true;
           if (change.type === 'added') {
             this.messageList.push(new Message(change.doc.data()));

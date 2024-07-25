@@ -1,3 +1,9 @@
-<section>
-    <p>thradview arbietet</p>
+<section [ngClass]="navigationService.currentThread === undefined ? '' : 'show-threadview'"  class="card-multi">
+    <div class="card-header">
+        <span># header ........</span>
+    </div>
+    <div class="messagelist bubble-scrollbar">
+        <app-chatview [chat]="chatservice.chat"></app-chatview>
+    </div>
+    <app-writemessage class="card-footer" [chat]="chatservice.chat"></app-writemessage>
 </section>
