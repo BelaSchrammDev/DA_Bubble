@@ -4,6 +4,7 @@ import { collection, Firestore } from '@angular/fire/firestore';
 import { onSnapshot } from '@firebase/firestore';
 import { Message } from '../shared/models/message.model';
 import { RendermessageComponent } from "./rendermessage/rendermessage.component";
+import { NavigationService } from '../shared/service/navigation.service';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class ChatviewComponent implements OnDestroy {
   public loading = true;
 
   private firestore = inject(Firestore);
+  private navigationService = inject(NavigationService);
   private _chat: Chat | undefined;
   private unsubChatMessages: any;
 
@@ -32,6 +34,13 @@ export class ChatviewComponent implements OnDestroy {
     this.unSubscribeChatMessages();
     this.messageList = [];
     this.subscribeChatMessages();
+  }
+
+
+  messageSelected(message: Message) {
+    if(message.answerable) {
+      this.navigationService.setCurrentThread(message);
+    }
   }
 
 

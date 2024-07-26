@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Message } from '../../shared/models/message.model';
 import { UserbadgeComponent } from "../../shared/components/userbadge/userbadge.component";
 import { UsersService } from '../../shared/service/users.service';
@@ -16,7 +16,8 @@ import { NavigationService } from '../../shared/service/navigation.service';
 })
 export class RendermessageComponent {
 
-  private navigationService = inject(NavigationService);
+  @Output() messageSelected = new EventEmitter<Message>();
+
   public userservice = inject(UsersService);
   public user: User | undefined;
 
@@ -40,9 +41,17 @@ export class RendermessageComponent {
       return '';
     }
 
-    selectThread() {
+    getLastAnswerAtTimeAsString(): string {
+      if (this._message && this._message.lastAnswerAt) {
+        return this._message.lastAnswerAt.getHours() + ':' + this._message.lastAnswerAt.getMinutes();
+      }
+      return '';
+    }
+
+
+    selectMessage() {
       if (this._message) {
-        this.navigationService.setCurrentThread(this._message);
+        this.messageSelected.emit(this._message);
       }
     }
 }

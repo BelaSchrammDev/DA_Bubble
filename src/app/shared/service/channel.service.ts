@@ -2,6 +2,7 @@ import { Channel } from '../models/channel.model';
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { addDoc, updateDoc, collection, Firestore, onSnapshot, doc } from '@angular/fire/firestore';
 import { UsersService } from './users.service';
+import { ChatService } from './chat.service';
 
 
 @Injectable({
@@ -11,6 +12,7 @@ export class ChannelService implements OnDestroy {
 
   private firestore = inject(Firestore);
   private userservice = inject(UsersService);
+  private chatservice = inject(ChatService);
   private unsubChannels: any;
 
   public channels: Channel[] = [];
@@ -46,23 +48,11 @@ export class ChannelService implements OnDestroy {
       description: newchannel.description,
       created: Date.now(),
       creatorID: this.userservice.getCurrentUserID(),
-      chatID: await this.addNewChatToFirestore(newchannel.memberIDs ? newchannel.memberIDs : this.userservice.getAllUsersAsIDList()),
+      chatID: await this.chatservice.addNewChatToFirestore(newchannel.memberIDs ? newchannel.memberIDs : this.userservice.getAllUsersAsIDList()),
     };
     let ref = collection(this.firestore, '/channels');
     let newChannel = await addDoc(ref, channelObj);
     await updateDoc(doc(this.firestore, '/channels/' + newChannel.id), { id: newChannel.id });
-  }
-
-
-  async addNewChatToFirestore(memberIDs: string[]) {
-    const chatObj = {
-      memberIDs: memberIDs,
-      messageIDs: []
-    };
-    let ref = collection(this.firestore, '/chats');
-    let newChat = await addDoc(ref, chatObj);
-    await updateDoc(doc(this.firestore, '/chats/' + newChat.id), { id: newChat.id });
-    return newChat.id;
   }
 
 

@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ChannelService } from '../shared/service/channel.service';
 import { UsersService } from '../shared/service/users.service';
 import { PrivatmessageheadlineComponent } from './privatmessageheadline/privatmessageheadline.component';
@@ -7,7 +7,6 @@ import { NavigationService } from '../shared/service/navigation.service';
 import { ChatviewComponent } from '../chatview/chatview.component';
 import { ChatService } from '../shared/service/chat.service';
 import { WritemessageComponent } from '../shared/components/writemessage/writemessage.component';
-import { Message } from '../shared/models/message.model';
 import { addDoc, collection, doc, Firestore, serverTimestamp, updateDoc } from '@angular/fire/firestore';
 
 @Component({
@@ -33,7 +32,6 @@ export class ChannelviewComponent {
 
 
   async addMessageToChat(messageText: string) {
-    console.log('addMessageToChat ' + messageText + ' & ' + this.navigationService.currentChat);
     if (this.navigationService.currentChat) {
       let newMessage = this.createNewMessageObject(messageText);
       await this.addChatMessageToFirestore(newMessage, '/chats/' + this.navigationService.currentChat.id + '/messages/');
@@ -55,7 +53,8 @@ export class ChannelviewComponent {
       createdAt: serverTimestamp(),
       content: messageText,
       emojies: [],
-      answerable: true
+      answerable: true,
+      answerCount: 0,
     };
   }
 

@@ -1,12 +1,12 @@
 <section>
     @for(message of messageList; track message; let index = $index) {
     @if(ifDaySeparatorNeeded(index)) {
-        <div class="separator">
-            <div class="separator-line"></div>
-            <span class="nunito-18-400">{{ getDaySeparatorText(index) }}</span>
-            <div class="separator-line"></div>
-        </div>
+    <div class="separator">
+        <div class="separator-line"></div>
+        <span class="nunito-18-400">{{ getDaySeparatorText(index) }}</span>
+        <div class="separator-line"></div>
+    </div>
     }
-    <app-rendermessage [message]="message"></app-rendermessage>
+    <app-rendermessage (messageSelected)="messageSelected($event)" [message]="message"></app-rendermessage>
     }
 </section>

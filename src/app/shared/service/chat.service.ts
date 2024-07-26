@@ -1,5 +1,5 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
-import { doc, Firestore, onSnapshot } from '@angular/fire/firestore';
+import { addDoc, collection, doc, Firestore, onSnapshot, updateDoc } from '@angular/fire/firestore';
 import { Chat } from '../models/chat.model';
 
 @Injectable({
@@ -12,6 +12,17 @@ export class ChatService implements OnDestroy {
   private firestore = inject(Firestore);
   private unsubChat: any;
   private chatID: string | undefined;
+
+
+  async addNewChatToFirestore(memberIDs: string[]) {
+    const chatObj = {
+      memberIDs: memberIDs,
+    };
+    let ref = collection(this.firestore, '/chats');
+    let newChat = await addDoc(ref, chatObj);
+    await updateDoc(doc(this.firestore, '/chats/' + newChat.id), { id: newChat.id });
+    return newChat.id;
+  }
 
 
   getChatID(): string | undefined {
