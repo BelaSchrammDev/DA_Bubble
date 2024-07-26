@@ -19,12 +19,16 @@ export class ChatService implements OnDestroy {
   }
 
 
-  setChatID(chatID: string): void {
+  setChatID(chatID: string): Chat | undefined {
     if (this.chatID !== chatID) {
       this.unsubscribeChat();
       this.chatID = chatID;
-      if (chatID != '') this.subscribeChat(chatID);
+      if (chatID != '') {
+        this.subscribeChat(chatID);
+        return this.chat;
+      }
     }
+    return undefined;
   }
 
 

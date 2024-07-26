@@ -1,6 +1,7 @@
-import { serverTimestamp } from "@angular/fire/firestore";
+import { Timestamp } from "@angular/fire/firestore";
 
 export class Message {
+  [key: string]: any;
   id: string;
   creatorID: string;
   createdAt: Date;
@@ -11,20 +12,10 @@ export class Message {
   constructor(data: any, answerable: boolean = false) {
     this.id = data.id ? data.id : '';
     this.creatorID = data.creatorID ? data.creatorID : '';
-    this.createdAt = data.createdAt ? (data.createdAt as any).toDate() : serverTimestamp();
+    this.createdAt = data.createdAt ? (data.createdAt as Timestamp).toDate() : new Date();
     this.content = data.content ? data.content : '';
     this.emojies = data.emojies ? data.emojies : [];
     this.answerable = answerable;
   }
 
-  toJsonObject() {
-    return {
-      id: this.id,
-      creatorID: this.creatorID,
-      createdAt: this.createdAt,
-      content: this.content,
-      emojies: this.emojies,
-      answerable: this.answerable
-    }
-  }
 }

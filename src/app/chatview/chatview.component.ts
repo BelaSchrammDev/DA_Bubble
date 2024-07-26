@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnChanges, OnDestroy, SimpleChange, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input, OnDestroy } from '@angular/core';
 import { Chat } from '../shared/models/chat.model';
 import { collection, Firestore } from '@angular/fire/firestore';
 import { onSnapshot } from '@firebase/firestore';
@@ -13,9 +13,7 @@ import { RendermessageComponent } from "./rendermessage/rendermessage.component"
   templateUrl: './chatview.component.html',
   styleUrl: './chatview.component.scss'
 })
-export class ChatviewComponent implements OnDestroy, OnChanges {
-  ngOnChanges(changes: SimpleChanges): void {
-  }
+export class ChatviewComponent implements OnDestroy {
 
   public messageList: Message[] = [];
   public loading = true;
@@ -23,7 +21,6 @@ export class ChatviewComponent implements OnDestroy, OnChanges {
   private firestore = inject(Firestore);
   private _chat: Chat | undefined;
   private unsubChatMessages: any;
-  private changes = false;
 
   @Input()
   public get chat(): Chat | undefined {
@@ -76,15 +73,7 @@ export class ChatviewComponent implements OnDestroy, OnChanges {
   }
 
 
-  constructor() {
-    setInterval(() => {
-      if (this.changes) {
-        this.changes = false;
-        this.messageList.sort((a, b) => { return Number(a.createdAt) - Number(b.createdAt); });
-        this.loading = false;
-      }
-    }, 500);
-  }
+  constructor(private _changeDetectorRef: ChangeDetectorRef) { }
 
 
   subscribeChatMessages() {
@@ -92,7 +81,6 @@ export class ChatviewComponent implements OnDestroy, OnChanges {
       this.unsubChatMessages = onSnapshot(collection(this.firestore, 'chats', this.chat.id, 'messages'), (snapshot) => {
         snapshot.docChanges().forEach((change) => {
           this.loading = true;
-          this.changes = true;
           if (change.type === 'added') {
             this.messageList.push(new Message(change.doc.data()));
           }
@@ -108,6 +96,8 @@ export class ChatviewComponent implements OnDestroy, OnChanges {
             this.messageList = this.messageList.filter((message) => message.id !== change.doc.data()['id']);
           }
         });
+        this.messageList.sort((a, b) => { return Number(a.createdAt) - Number(b.createdAt); });
+        this._changeDetectorRef.detectChanges();
       });
     }
   }
