@@ -7,6 +7,24 @@ section {
     align-items: stretch;
     transition: max-width 0.5s;
 
+    .thread-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: var(--button-line-height);
+    }
+
+    .headline {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: var(--main-spacing);
+
+        .channelname {
+            color: var(--channelname-color);
+        }
+    }
+
     .messagelist {
         overflow-y: auto;
         min-height: var(--card-chatview-height);

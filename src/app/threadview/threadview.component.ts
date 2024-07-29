@@ -9,6 +9,7 @@ import { ChannelService } from '../shared/service/channel.service';
 import { UsersService } from '../shared/service/users.service';
 import { ThreadService } from '../shared/service/thread.service';
 import { last } from 'rxjs';
+import { RendermessageComponent } from '../chatview/rendermessage/rendermessage.component';
 
 @Component({
   selector: 'app-threadview',
@@ -16,6 +17,7 @@ import { last } from 'rxjs';
   imports: [
     ChatviewComponent,
     WritemessageComponent,
+    RendermessageComponent,
     CommonModule
   ],
   templateUrl: './threadview.component.html',
