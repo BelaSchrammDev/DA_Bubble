@@ -18,17 +18,19 @@ section {
             color: #686868;
         }
 
-        .message-text-left {
+        .message-text-other {
             border-radius: 0 30px 30px 30px;
+            background-color: var(--message-bg-color);
+            color: black;
         }
 
-        .message-text-right {
+        .message-text-self {
             border-radius: 30px 0 30px 30px;
+            background-color: var(--message-bg-color-self);
+            color: white;
         }
 
         .message-text {
-            background-color: #797EF3;
-            color: white;
             padding: var(--main-spacing);
             white-space: pre-line;
         }
@@ -53,8 +55,26 @@ section {
             gap: var(--main-spacing);
         }
 
+        .thread-answers {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: var(--main-spacing);
+
+            .thread-answercount {
+                color: var(--writemessage-border-color);
+            }
+
+            div {
+                flex-grow: 1;
+                height: 2px;
+                background-color: var(--writemessage-border-color);
+            }
+        }
+
         .answercount {
-            color: #535AF1;
+            color: var(--answercount-color);
 
             &:hover {
                 cursor: pointer;
@@ -67,12 +87,10 @@ section {
         }
 
         &:hover {
-            cursor: pointer;
             background-color: #ECEEFE;
 
-            .message-text {
+            .message-text-other {
                 background-color: white;
-                color: black;
             }
         }
     }

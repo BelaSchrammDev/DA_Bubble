@@ -4,8 +4,6 @@ import { UserbadgeComponent } from "../../shared/components/userbadge/userbadge.
 import { UsersService } from '../../shared/service/users.service';
 import { User } from '../../shared/models/user.model';
 import { CommonModule } from '@angular/common';
-import { NavigationService } from '../../shared/service/navigation.service';
-
 
 @Component({
   selector: 'app-rendermessage',
@@ -16,6 +14,7 @@ import { NavigationService } from '../../shared/service/navigation.service';
 })
 export class RendermessageComponent {
 
+  @Input() viewanswercount = false;
   @Output() messageSelected = new EventEmitter<Message>();
 
   public userservice = inject(UsersService);

@@ -1,14 +1,15 @@
 <section class="card-multi">
     <div class="card-header">
         @if(navigationService.privateMessage) {
-            <app-privatmessageheadline></app-privatmessageheadline>
+        <app-privatmessageheadline></app-privatmessageheadline>
         }
         @else {
-            <app-channelheadline></app-channelheadline>
+        <app-channelheadline></app-channelheadline>
         }
     </div>
     <div class="messagelist bubble-scrollbar">
-        <app-chatview [chat]="chatservice.chat"></app-chatview>
+        <app-chatview (messageSelectedEvent)="selectMessage($event)" [showAnswerCount]="true"
+            [chat]="chatservice.chat"></app-chatview>
     </div>
     <app-writemessage class="card-footer" (sendMessageEvent)="addMessageToChat($event)"></app-writemessage>
 </section>

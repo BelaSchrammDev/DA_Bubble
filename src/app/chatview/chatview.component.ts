@@ -1,11 +1,9 @@
-import { ChangeDetectorRef, Component, inject, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject, Input, OnDestroy, Output } from '@angular/core';
 import { Chat } from '../shared/models/chat.model';
 import { collection, Firestore } from '@angular/fire/firestore';
 import { onSnapshot } from '@firebase/firestore';
 import { Message } from '../shared/models/message.model';
 import { RendermessageComponent } from "./rendermessage/rendermessage.component";
-import { NavigationService } from '../shared/service/navigation.service';
-
 
 @Component({
   selector: 'app-chatview',
@@ -16,14 +14,16 @@ import { NavigationService } from '../shared/service/navigation.service';
 })
 export class ChatviewComponent implements OnDestroy {
 
+  @Output() messageSelectedEvent = new EventEmitter<Message>();
+
+  @Input() showAnswerCount = true;
   public messageList: Message[] = [];
   public loading = true;
 
   private firestore = inject(Firestore);
-  private navigationService = inject(NavigationService);
-  private _chat: Chat | undefined;
   private unsubChatMessages: any;
-
+  
+  private _chat: Chat | undefined;
   @Input()
   public get chat(): Chat | undefined {
     return this._chat;
@@ -39,7 +39,7 @@ export class ChatviewComponent implements OnDestroy {
 
   messageSelected(message: Message) {
     if(message.answerable) {
-      this.navigationService.setCurrentThread(message);
+      this.messageSelectedEvent.emit(message);
     }
   }
 

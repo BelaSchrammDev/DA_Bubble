@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { NavigationService } from '../shared/service/navigation.service';
 import { ChatviewComponent } from '../chatview/chatview.component';
 import { WritemessageComponent } from '../shared/components/writemessage/writemessage.component';
@@ -8,8 +8,10 @@ import { addDoc, collection, doc, Firestore, serverTimestamp, updateDoc } from '
 import { ChannelService } from '../shared/service/channel.service';
 import { UsersService } from '../shared/service/users.service';
 import { ThreadService } from '../shared/service/thread.service';
-import { last } from 'rxjs';
+import { last, Subscription } from 'rxjs';
 import { RendermessageComponent } from '../chatview/rendermessage/rendermessage.component';
+import { Message } from '../shared/models/message.model';
+import { Chat } from '../shared/models/chat.model';
 
 @Component({
   selector: 'app-threadview',
@@ -23,15 +25,41 @@ import { RendermessageComponent } from '../chatview/rendermessage/rendermessage.
   templateUrl: './threadview.component.html',
   styleUrl: './threadview.component.scss'
 })
-export class ThreadviewComponent {
+export class ThreadviewComponent implements OnInit, OnDestroy {
 
+  private changeSubcription: Subscription | undefined;
   private firestore = inject(Firestore);
+  private userservice = inject(UsersService);
+  private chatservice = inject(ChatService);
+  private threadservice = inject(ThreadService);
+  private navigationService = inject(NavigationService);
 
-  public channelservice = inject(ChannelService);
-  public userservice = inject(UsersService);
-  public chatservice = inject(ChatService);
-  public threadservice = inject(ThreadService);
-  public navigationService = inject(NavigationService);
+  public thread: Message | undefined;
+  public threadChat: Chat | undefined;
+
+  constructor(private cdr: ChangeDetectorRef) { }
+
+  ngOnInit(): void {
+    this.changeSubcription = this.navigationService.change$.subscribe((change) => {
+      if (this.thread != this.threadservice.thread || this.threadChat != this.threadservice.threadChat) {
+        this.thread = this.threadservice.thread;
+        this.threadChat = this.threadservice.threadChat;
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+
+  ngOnDestroy(): void {
+    if (this.changeSubcription) {
+      this.changeSubcription.unsubscribe();
+    }
+  }
+
+
+  closeThread() {
+    this.navigationService.setCurrentThread(undefined);
+  }
 
 
   async addAnswerToChat(messageText: string) {

@@ -7,6 +7,6 @@
         <div class="separator-line"></div>
     </div>
     }
-    <app-rendermessage (messageSelected)="messageSelected($event)" [message]="message"></app-rendermessage>
+    <app-rendermessage [viewanswercount]="showAnswerCount" (messageSelected)="messageSelected($event)" [message]="message"></app-rendermessage>
     }
 </section>

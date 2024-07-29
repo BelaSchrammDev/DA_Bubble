@@ -1,18 +1,18 @@
-<section [ngClass]="threadservice.thread === undefined ? '' : 'show-threadview'" class="card-multi">
+<section [ngClass]="thread === undefined ? '' : 'show-threadview'" class="card-multi">
     <div class="card-header thread-header">
         <div class="headline">
             <span class="nunito-24-700">Thread</span>
             <span class="nunito-14-400 channelname"># channelname</span>
         </div>
         <div>
-            <img class="svg-btn svg-btn-hover" src="./../../assets/icons/close.svg" alt="">
+            <img (click)="closeThread()" class="svg-btn svg-btn-hover" src="./../../assets/icons/close.svg" alt="">
         </div>
     </div>
     <div class="messagelist bubble-scrollbar">
-        <app-rendermessage [message]="threadservice.thread"></app-rendermessage>
-        @if(threadservice.threadChat !== undefined)
+        <app-rendermessage [viewanswercount]="false" [message]="thread"></app-rendermessage>
+        @if(threadChat !== undefined)
         {
-        <app-chatview [chat]="threadservice.threadChat"></app-chatview>
+        <app-chatview [showAnswerCount]="false" [chat]="threadChat"></app-chatview>
         }
         @else {
             <span>Bisher keine Antworten, schreiben sie eine...</span>

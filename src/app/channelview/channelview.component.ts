@@ -8,6 +8,7 @@ import { ChatviewComponent } from '../chatview/chatview.component';
 import { ChatService } from '../shared/service/chat.service';
 import { WritemessageComponent } from '../shared/components/writemessage/writemessage.component';
 import { addDoc, collection, doc, Firestore, serverTimestamp, updateDoc } from '@angular/fire/firestore';
+import { Message } from '../shared/models/message.model';
 
 @Component({
   selector: 'app-channelview',
@@ -44,6 +45,11 @@ export class ChannelviewComponent {
     let newMessageRef = await addDoc(ref, message);
     await updateDoc(doc(this.firestore, messagesPath + newMessageRef.id), { id: newMessageRef.id });
     message.id = newMessageRef.id;
+  }
+
+
+  selectMessage(message: Message) {
+    this.navigationService.setCurrentThread(message);
   }
 
 

@@ -5,6 +5,11 @@
   --writemessage-border-color-high: #444DF2;
   --writemessage-spacing: 20px;
 
+  --message-bg-color: #ECEEFE;
+  --message-bg-color-self: #797EF3;
+
+  --answercount-color: #535AF1;
+
   --primary-bg-color: #ECEEFE;
   --hover-bg-color: #ECEEFE;
   --hover-color: #535AF1;
@@ -70,6 +75,10 @@ body {
 .svg-btn-disabled {
   pointer-events: none;
   filter: grayscale(100%);
+}
+
+.cursor-ptr {
+  cursor: pointer;
 }
 
 .card {
