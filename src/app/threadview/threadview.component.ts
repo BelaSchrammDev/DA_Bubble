@@ -62,6 +62,14 @@ export class ThreadviewComponent implements OnInit, OnDestroy {
   }
 
 
+  getAnswerCountText() {
+    if (this.thread && this.thread.answerCount > 0) {
+      return this.thread.answerCount + ' Antworte' + (this.thread.answerCount > 1 ? 'n' : '');
+    }
+    return 'Keine Antworten';
+  }
+
+
   async addAnswerToChat(messageText: string) {
     if (this.threadservice.thread && this.navigationService.currentChat && this.threadservice.thread.answerable) {
       if (!this.threadservice.thread.chatID) {
@@ -75,6 +83,7 @@ export class ThreadviewComponent implements OnInit, OnDestroy {
       await updateDoc(doc(this.firestore, '/chats/' + this.navigationService.currentChat.id + '/messages/' + this.threadservice.thread.id), messageUpdateData);
       let newMessage = this.createNewMessageObject(messageText);
       await this.addChatMessageToFirestore(newMessage, '/chats/' + this.threadservice.thread.chatID + '/messages/');
+      this.cdr.detectChanges();
     }
   }
 

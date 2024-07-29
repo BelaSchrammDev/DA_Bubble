@@ -14,11 +14,12 @@ export class WritemessageComponent {
   @Output() public sendMessageEvent = new EventEmitter<string>();
 
   public messagetext: string = '';
-  public sending: boolean = false;
+  // public sending: boolean = false;
 
 
   emitSendMessageEvent() {
     this.sendMessageEvent.emit(this.messagetext);
+    this.messagetext = '';
   }
 
 }

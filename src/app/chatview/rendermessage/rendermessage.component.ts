@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { Message } from '../../shared/models/message.model';
 import { UserbadgeComponent } from "../../shared/components/userbadge/userbadge.component";
 import { UsersService } from '../../shared/service/users.service';
@@ -12,9 +12,9 @@ import { CommonModule } from '@angular/common';
   templateUrl: './rendermessage.component.html',
   styleUrl: './rendermessage.component.scss'
 })
-export class RendermessageComponent {
-
+export class RendermessageComponent implements OnInit {
   @Input() viewanswercount = false;
+  @Input() scrollInView = false;
   @Output() messageSelected = new EventEmitter<Message>();
 
   public userservice = inject(UsersService);
@@ -26,31 +26,42 @@ export class RendermessageComponent {
     if (this._message?.creatorID) {
       this.user = this.userservice.getUserByID(this._message.creatorID);
     }
-    }
+  }
 
-    get message(): Message | undefined {
+  get message(): Message | undefined {
     return this._message;
+  }
+
+
+  constructor(private elementRef: ElementRef) { }
+
+
+  ngOnInit(): void {
+    if (this.scrollInView) {
+      this.elementRef.nativeElement.scrollIntoView({ behavior: 'smooth' });
     }
+  }
 
 
-    getCreatedAtTimeAsString(): string {
-      if (this._message) {
-        return this._message.createdAt.getHours() + ':' + this._message.createdAt.getMinutes();
-      }
-      return '';
+  getCreatedAtTimeAsString(): string {
+    if (this._message) {
+      return this._message.createdAt.getHours() + ':' + this._message.createdAt.getMinutes();
     }
+    return '';
+  }
 
-    getLastAnswerAtTimeAsString(): string {
-      if (this._message && this._message.lastAnswerAt) {
-        return this._message.lastAnswerAt.getHours() + ':' + this._message.lastAnswerAt.getMinutes();
-      }
-      return '';
+
+  getLastAnswerAtTimeAsString(): string {
+    if (this._message && this._message.lastAnswerAt) {
+      return this._message.lastAnswerAt.getHours() + ':' + this._message.lastAnswerAt.getMinutes();
     }
+    return '';
+  }
 
 
-    selectMessage() {
-      if (this._message) {
-        this.messageSelected.emit(this._message);
-      }
+  selectMessage() {
+    if (this._message) {
+      this.messageSelected.emit(this._message);
     }
+  }
 }

@@ -10,12 +10,16 @@
     </div>
     <div class="messagelist bubble-scrollbar">
         <app-rendermessage [viewanswercount]="false" [message]="thread"></app-rendermessage>
+        @if(thread)
+        {
+        <div class="answercount">
+            <span class="nunito-18-400 count">{{ getAnswerCountText() }}</span>
+            <div class="line"></div>
+        </div>
+        }
         @if(threadChat !== undefined)
         {
         <app-chatview [showAnswerCount]="false" [chat]="threadChat"></app-chatview>
-        }
-        @else {
-            <span>Bisher keine Antworten, schreiben sie eine...</span>
         }
     </div>
     <app-writemessage (sendMessageEvent)="addAnswerToChat($event)" class="card-footer"></app-writemessage>

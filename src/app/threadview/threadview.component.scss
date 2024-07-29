@@ -29,6 +29,25 @@ section {
         overflow-y: auto;
         min-height: var(--card-chatview-height);
         max-height: var(--card-chatview-height);
+
+        .answercount {
+            align-self: stretch;
+            padding: var(--main-spacing) var(--card-inner-spacing);
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: var(--main-spacing);
+
+            .count {
+                color: var(--writemessage-border-color);
+            }
+
+            .line {
+                height: 1px;
+                flex-grow: 1;
+                background-color: var(--writemessage-border-color);
+            }
+        }
     }
 }
 
