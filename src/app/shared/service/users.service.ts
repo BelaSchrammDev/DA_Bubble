@@ -1,6 +1,8 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { addDoc, updateDoc, collection, Firestore, onSnapshot, setDoc, doc } from '@angular/fire/firestore';
 import { User } from '../models/user.model';
+import { Auth, createUserWithEmailAndPassword, updateProfile } from '@angular/fire/auth';
+import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +10,7 @@ import { User } from '../models/user.model';
 export class UsersService implements OnDestroy {
 
   private firestore = inject(Firestore);
+  private firebaseauth = inject(Auth);
   private unsubUsers: any;
 
   public users: User[] = [];
@@ -19,7 +22,7 @@ export class UsersService implements OnDestroy {
         if (change.type === 'added') {
           this.users.push(new User(change.doc.data()));
           // debug initial:
-          if(this.currentUser === undefined) {
+          if (this.currentUser === undefined) {
             this.currentUser = this.users[0];
           }
         }
@@ -39,12 +42,20 @@ export class UsersService implements OnDestroy {
   }
 
 
-  async addUserToFirestore(user: any, password: string) {
+  registerNewUser(email: string, password: string): Observable<void> {
+    const promise = createUserWithEmailAndPassword(this.firebaseauth, email, password)
+      .then((response) => {
+        updateProfile(response.user, { displayName: '123456789' });
+      })
+    return from(promise);
+  }
+
+
+  async addUserToFirestore(user: any) {
     const userObj = {
       name: user.name,
       email: user.email,
       avatar: user.avatar,
-      password: password,
       online: false
     };
     let ref = collection(this.firestore, '/users');

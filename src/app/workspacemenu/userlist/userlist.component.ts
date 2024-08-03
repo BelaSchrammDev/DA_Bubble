@@ -39,7 +39,7 @@ export class UserlistComponent {
       { name: 'Eve', email: 'eve@online.dev', avatar: 2, password: '123' },
     ];
     defaultUsers.forEach(user => {
-      this.userservice.addUserToFirestore(user, user.password);
+      this.userservice.addUserToFirestore(user);
     });
   }
 }
