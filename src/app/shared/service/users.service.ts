@@ -42,12 +42,31 @@ export class UsersService implements OnDestroy {
   }
 
 
-  registerNewUser(email: string, password: string): Observable<void> {
-    const promise = createUserWithEmailAndPassword(this.firebaseauth, email, password)
+  async registerNewUser(email: string, password: string): Promise<User | undefined> {
+    createUserWithEmailAndPassword(this.firebaseauth, email, password)
       .then((response) => {
         updateProfile(response.user, { displayName: '123456789' });
+        return this.addUserToFirestore(
+          {
+            name: 'name-' + response.user.email?.split,
+            email: response.user.email,
+            avatar: 1
+          }
+        );
       })
-    return from(promise);
+      .catch((error) => {
+        console.error('userservice/auth: Error registering user(', error.message, ')');
+        return undefined;
+      });
+    return undefined;
+  }
+
+
+  changeUserAvatar(user: User, avatar: number): void {
+    if (user) {
+      user.avatar = avatar;
+      setDoc(doc(this.firestore, '/users/' + user.id), { avatar: avatar }, { merge: true });
+    }
   }
 
 
@@ -61,6 +80,7 @@ export class UsersService implements OnDestroy {
     let ref = collection(this.firestore, '/users');
     let newUser = await addDoc(ref, userObj);
     await updateDoc(doc(this.firestore, '/users/' + newUser.id), { id: newUser.id });
+    return new User(userObj);
   }
 
 

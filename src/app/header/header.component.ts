@@ -14,7 +14,6 @@ import { UsersService } from '../shared/service/users.service';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  [x: string]: any;
 
   private formBuilder = inject(FormBuilder);
   private userservice = inject(UsersService);
@@ -24,23 +23,22 @@ export class HeaderComponent {
     password: ['', Validators.required]
   });
 
+
   submitSignInForm(event: Event) {
     event.preventDefault();
     const rawValue = this.signinForm.getRawValue();
     if (rawValue.email && rawValue.password) {
       this.userservice
         .registerNewUser(rawValue.email, rawValue.password)
-        .subscribe({
-          next: () => {
-            console.log('User registered successfully');
-          },
-          error: (error) => {
-            console.error('Error registering user:', error);
-          },
-          complete: () => {
-            console.log('User registration complete');
+        .then(
+          (user) => {
+            console.log('User registered successfully:', user);
           }
-        });
+        )
+        .catch(
+          (error) => {
+            console.error('Error registering user:', error);
+          });
     }
   }
 
