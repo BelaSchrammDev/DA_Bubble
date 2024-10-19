@@ -1,3 +1,7 @@
+@import "../../../../../styles.scss";
+@import "../../../../../mixins.scss";
+
+
 main {
   display: flex;
   flex-direction: column;
@@ -8,5 +12,13 @@ main {
 
   > ul {
     margin: 0;
+  }
+
+  .admin-div {
+    @include flex(flex-start, center);
+    gap: 1rem;
+    button {
+      @include buttonFull;
+    }
   }
 }
