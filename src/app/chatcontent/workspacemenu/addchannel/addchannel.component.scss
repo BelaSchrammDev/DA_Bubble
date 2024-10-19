@@ -1,0 +1,299 @@
+@import "../../../../fonts.scss";
+@import "../../../../styles.scss";
+@import "../../../../mixins.scss";
+
+.add-channel.fullscreen {
+  padding: 0;
+
+  @media screen and (orientation: landscape) {
+    .addChannelSection {
+      gap: 0.5rem;
+      padding: 1.2rem;
+    }
+  }
+}
+
+.fullscreen {
+  width: 100vw;
+  height: 100%;
+  border-radius: 0 !important;
+
+  .addChannelSection,
+  .addUserToChannel {
+    width: 100% !important;
+    border: none;
+  }
+}
+
+#addChannelId {
+  transform: translateY(3rem);
+  display: none;
+  border: 0rem;
+  opacity: 0;
+  transition: $transition-popover;
+
+  @media (width < 426px) {
+    padding: 0;
+  }
+}
+
+#addChannelId:popover-open {
+  transform: translateY(0rem);
+  display: flex;
+  opacity: 1;
+}
+
+%starting-style {
+  #addChannelId:popover-open {
+    transform: translateY(-3rem);
+    opacity: 0;
+  }
+}
+
+.add-channel::backdrop {
+  background: #00000066;
+  backdrop-filter: blur(0.1875rem);
+}
+
+[popover] {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background: unset;
+}
+
+.addChannelSection {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 2.2rem;
+  border-radius: 1rem;
+  background-color: #fff;
+  border: 0.0625rem;
+  box-shadow: 0rem 0.375rem 0.625rem rgba(0, 0, 0, 0.2);
+  > div {
+    display: flex;
+    width: 100%;
+  }
+
+  .headline {
+    @include flex(space-between, center);
+    flex-direction: row;
+  }
+
+  .close-add-channel {
+    all: unset;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-image: url("../../../../assets/icons/chat/general/close.svg");
+    background-repeat: no-repeat;
+    background-size: center;
+    background-position: center;
+    border-radius: 1.25rem;
+    overflow: visible;
+  }
+
+  .close-add-channel:hover {
+    cursor: pointer;
+    background-image: url("../../../../assets/icons/chat/general/close-hover.svg");
+    background-color: #eceefe;
+  }
+
+  input {
+    gap: 1.25rem;
+    width: 100%;
+    height: 3.75rem;
+    padding: 1.125rem 1.25rem 1.125rem 1.25rem;
+    border-radius: 2.5rem;
+    border: 0.0625rem solid #adb0d9;
+
+    &:focus-within {
+      box-shadow: $profile-box-shadow;
+    }
+  }
+
+  input:hover {
+    border-color: #535af1;
+    cursor: pointer;
+  }
+
+  @media (width < 426px) {
+    height: 100%;
+    border-radius: 0;
+    gap: 1.25rem !important;
+  }
+}
+
+.duplicate-channel-error-msg {
+  width: 100%;
+  margin-top: -1rem;
+  color: #f00;
+  font-size: 0.875rem;
+  text-align: start;
+  opacity: 1;
+  transition: $transition-standard;
+}
+
+.hide-duplicate-channel-error-msg {
+  width: 100%;
+  margin-top: -1rem;
+  color: #f00;
+  font-size: 0.875rem;
+  text-align: start;
+  opacity: 0;
+}
+
+.addUserToChannel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 45rem;
+  padding: 2.2rem;
+  border-radius: 1rem;
+  background-color: #fff;
+  border: 0.0625rem;
+  box-shadow: 0rem 0.375rem 0.625rem rgba(0, 0, 0, 0.2);
+  > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.25rem;
+    width: 100%;
+    > div {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      > .select-user-search {
+        @include round-checkbox();
+        margin: 0;
+      }
+      > label:hover {
+        cursor: pointer;
+      }
+    }
+    > div:hover {
+      cursor: default;
+    }
+  }
+
+  .close-add-user {
+    all: unset;
+    overflow: visible;
+    background-image: url("../../../../assets/icons/chat/general/close.svg");
+    background-repeat: no-repeat;
+    background-size: center;
+    background-position: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 1.25rem;
+  }
+
+  .close-add-user:hover {
+    cursor: pointer;
+    background-image: url("../../../../assets/icons/chat/general/close-hover.svg");
+    background-color: #eceefe;
+  }
+
+  .user-search {
+    gap: 1.25rem;
+    width: 39.375rem;
+    height: 3.75rem;
+    padding: 1.125rem 1.25rem 1.125rem 1.25rem;
+    border-radius: 2.5rem;
+    border: 0.0625rem solid #adb0d9;
+  }
+}
+
+.button-ctn {
+  @include buttonFull();
+}
+
+.addUserSearchbar {
+  width: 100%;
+  @include flex(flex-start, flex-start);
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.125rem;
+  border: 1px solid $disabled;
+  border-radius: 1.875rem;
+  background-color: #fff;
+  transition: $transition-standard;
+
+  &:focus-within {
+    box-shadow: $profile-box-shadow;
+  }
+
+  input {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  input:hover {
+    cursor: pointer;
+  }
+
+  .search-blocks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+
+    &.context-active {
+      margin: 0.5rem 0;
+    }
+  }
+
+  .search-block-item {
+    @include flex(space-evenly, center);
+    gap: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    background-color: $background;
+    border-radius: 1rem;
+    color: $accent;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    button.remove-context {
+      @include flex(flex-start, center);
+      margin-left: 0.25rem;
+      padding: 0;
+      background: none;
+      border: none;
+
+      &:hover img {
+        content: url("../../../../assets/icons/modals/close-search-item-hover.svg");
+        border-color: $error;
+      }
+
+      img {
+        width: 1.25rem;
+        aspect-ratio: 1 / 1;
+        padding: 0.125rem;
+        border-radius: 50%;
+        border: $active-border;
+      }
+    }
+  }
+
+  .suggestion-item {
+    @include flex(flex-start, center);
+    gap: 0.25rem;
+    width: fit-content;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: $transition-standard;
+
+    &:hover {
+      padding: 0.5rem 0.825rem;
+      background-color: $background;
+      border-radius: $circled-border-radius;
+      color: $accent;
+      font-weight: 700;
+    }
+  }
+}
+
+.addUserSearchbar:hover {
+  border-color: #535af1;
+}

@@ -1,12 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './header/header.component';
-import { WorkspacemenuComponent } from './workspacemenu/workspacemenu.component';
-import { ChannelviewComponent } from './channelview/channelview.component';
-import { ThreadviewComponent } from './threadview/threadview.component';
-import { NavigationService } from './shared/service/navigation.service';
-import { UsersService } from './shared/service/users.service';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { UsersService } from './utils/services/user.service';
+import { CleanupService } from './utils/services/cleanup.service';
+
 
 @Component({
   selector: 'app-root',
@@ -14,24 +11,26 @@ import { UsersService } from './shared/service/users.service';
   imports: [
     CommonModule,
     RouterOutlet,
-    HeaderComponent,
-    WorkspacemenuComponent,
-    ChannelviewComponent,
-    ThreadviewComponent
+    RouterModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-  title = 'dabubble';
 
-  private navigationService = inject(NavigationService);
+  title = 'DABubble303';
+
   private userservice = inject(UsersService);
+  private cleanupservice = inject(CleanupService);
 
+  @HostListener('window:beforeunload', ['$event'])
+  async unloadHandler(event: Event) {
+    if (this.userservice.currentUser) await this.userservice.updateCurrentUserDataOnFirestore({ online: false });
+  }
+
+  
   ngOnInit(): void {
-    if (this.navigationService && this.userservice && this.userservice.currentUser) {
-      this.navigationService.setCurrentChannel(this.userservice.currentUser.id);
-    }
+    
   }
 
 }

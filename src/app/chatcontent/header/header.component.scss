@@ -1,0 +1,91 @@
+@import "../../../styles.scss";
+@import "../../../mixins.scss";
+
+$header-gap: clamp(1.25rem, 4.28vw + -1.136rem, 4rem);
+
+section.header {
+  @include flex(center, center);
+  width: 100%;
+
+  .header-content {
+    @include flex(space-between, center);
+    width: calc(100% - 1.25rem * 2);
+    gap: $header-gap;
+    padding-left: var(--header-offset, 0);
+    transition: padding 0.25s ease-out;
+
+    @media (width < 560px) {
+      flex-wrap: wrap;
+      row-gap: 1rem;
+      padding: 0;
+    }
+
+    @media (width < 426px) {
+      row-gap: 0.625rem;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      @include flex(center, center);
+
+      @media (width < 560px) {
+        flex: 0 0 auto;
+        padding-left: 0.5rem;
+      }
+
+      @media (width < 426px) {
+        padding-left: 1.125rem;
+      }
+
+      img {
+        width: 4.375rem;
+        aspect-ratio: 1 / 1;
+
+        @media (width < 716px) {
+          width: 3.5rem;
+        }
+      }
+
+      .logo-text {
+        display: none;
+        @include nunito(2, 700, black);
+
+        @media (width < 560px) {
+          display: flex;
+          margin-left: 1.25rem;
+        }
+      }
+    }
+
+    .searchbar-box {
+      position: relative;
+      @include flex(center, center);
+      flex-grow: 1;
+      flex: 1 1 auto;
+      order: 0;
+      width: 100%;
+
+      @media (width < 560px) {
+        flex: 1 1 100%;
+        order: 1;
+        margin-top: 2rem;
+      }
+
+      app-searchbar {
+        width: 100%;
+      }
+    }
+
+    .profile-box {
+      width: fit-content;
+
+      @media (width < 560px) {
+        padding-right: 0.5rem;
+      }
+
+      @media (width < 426px) {
+        padding-right: 1.125rem;
+      }
+    }
+  }
+}

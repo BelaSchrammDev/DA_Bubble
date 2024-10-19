@@ -1,0 +1,66 @@
+<section>
+  <div class="workspace-menu-header">
+    <div>
+      <img src="assets/icons/wsm/devspace-logo.svg" alt="devspace-logo.svg" />
+      <span class="nunito-24-700">Devspace</span>
+    </div>
+  </div>
+  <div class="channels">
+    <details #channelsDetails (toggle)="toggleDetails(channelsDetails)" open>
+      <summary class="blue">
+        <div>
+          <div>
+            <div class="ws-channels"></div>
+            <span class="nunito-20-700">Channels</span>
+          </div>
+          <button class="add-channel-btn" (click)="toggleAddChannelPopover()"></button>
+        </div>
+      </summary>
+      <ul class="channel-list">
+        @for (channel of channelservice.channels; track channel) {
+        <li hoverElement [class.active]="activeChannel === channel" (click)="setChannel(channel)">
+          <div class="hashtag"></div>
+          <span class="nunito-18-400">{{ channel.name }}</span>
+          @if(channel.unreadMessagesCount > 0) {
+          <div class="new-message-count">{{ channel.unreadMessagesCount }}</div>
+          }
+        </li>
+        }
+      </ul>
+      <button hoverElement (click)="toggleAddChannelPopover()">
+        <div class="add-channel-2"></div>
+        <span class="nunito-18-400">Channel hinzufügen</span>
+      </button>
+    </details>
+  </div>
+  <div class="messagesChannels">
+    <details #dmDetails (toggle)="toggleDetails(dmDetails)" open>
+      <summary class="blue">
+        <div class="dm-symbol"></div>
+        <span class="nunito-20-700">Direktnachrichten</span>
+      </summary>
+      <ul>
+        @if(userservice.currentUser) {
+        <li class="dm-list-item" hoverElement [class.active]="activeUser === userservice.currentUser"
+          (click)="setChat(userservice.currentUser)">
+          <div class="avatar" appAvatar [user]="userservice.currentUser" context="wsm-list"></div>
+          <span>{{ userservice.currentUser.name }} <br />(Du) </span>
+        </li>
+        }
+        @for(activchat of channelservice.activeChats$ | async; track activchat) {
+        @if(activchat.partner !== userservice.currentUser) {
+        <li class="dm-list-item" hoverElement [class.active]="activeUser === activchat.partner"
+          (click)="setChat(activchat.chat); activeUser = activchat.partner">
+          <div class="avatar" appAvatar [user]="activchat.partner" context="wsm-list"></div>
+          <span> {{ activchat.partner.name }} </span>
+          @if(activchat.unreadMessagesCount > 0) {
+            <div class="new-message-count">{{ activchat.unreadMessagesCount }}</div>
+            }
+          </li>
+        }
+        }
+      </ul>
+    </details>
+  </div>
+  <app-addchannel />
+</section>

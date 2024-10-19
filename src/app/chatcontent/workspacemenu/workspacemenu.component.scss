@@ -1,0 +1,330 @@
+@import "../../../fonts.scss";
+@import "../../../mixins.scss";
+@import "../../../styles.scss";
+
+$wsm-gap: clamp(0rem, 2.083vw + -1.562rem, 0.9375rem);
+$chnl-ml: clamp(0.75rem, 2.222vw + -0.917rem, 1.75rem);
+$add-chnl-btn-pl: clamp(0.75rem, 4.444vw + -2.583rem, 2.75rem);
+
+$list-pr: clamp(0.75rem, 1.111vw + -0.083rem, 1.25rem);
+$list-pr-716: clamp(1rem, 4.13vw + 0.029rem, 1.875rem);
+
+$workspace-pr: clamp(0.75rem, 2.5vw + -1.125rem, 1.875rem);
+$workspace-pr-716: 1.875rem;
+
+$chnl-gap: clamp(0rem, 1.944vw + -1.458rem, 0.875rem);
+$dm-item-gap: clamp(0.625rem, 1.389vw + -0.417rem, 1.25rem);
+
+@mixin background-properties(
+  $bg-rep: no-repeat,
+  $bg-pos: center,
+  $bg-width: 2.5rem,
+  $bg-height: 2.5rem
+) {
+  background-repeat: $bg-rep;
+  background-position: $bg-pos;
+  min-width: $bg-width;
+  height: $bg-height;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5625rem;
+  width: 100%;
+  overflow-y: scroll;
+
+  .workspace-menu-header {
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    @include flex(space-between, center);
+    width: 100%;
+    min-height: 6rem;
+    max-height: 6rem;
+    padding: 0 $workspace-pr 0 1.875rem;
+    background: #fff;
+    box-shadow: $modal-box-shadow;
+    overflow: visible;
+
+    @media (width < 426px) {
+      min-height: 5rem;
+      max-height: 5rem;
+    }
+
+    @media (width < 716px) {
+      padding: 0 $workspace-pr-716 0 1.875rem;
+    }
+
+    @media (width < 716px) {
+      padding: 0 1.25rem;
+    }
+
+    div {
+      @include flex(flex-start, center);
+      gap: 0.9375rem;
+
+      img {
+        width: 3.75rem;
+        aspect-ratio: 1 / 1;
+      }
+    }
+  }
+
+  ul {
+    gap: 0.8125rem;
+    padding-left: 0;
+    list-style-type: none;
+
+    li {
+      @include flex(flex-start, center);
+
+      gap: $chnl-gap;
+
+      padding: 0.25rem 0.25rem 0.25rem 0.25rem;
+      margin-left: $chnl-ml;
+      border-radius: $circled-border-radius;
+
+      .hashtag {
+        background-image: url("../../../assets/icons/wsm/hashtag.svg");
+        @include background-properties;
+      }
+
+      span {
+        flex-grow: 1;
+        text-align: left;
+      }
+
+      .new-message-count {
+        @include nunito(0.875, 400, $primary);
+        margin-right: 0.875rem;
+      }
+
+      &:hover,
+      &.active {
+        background-color: #eceefe;
+        cursor: pointer;
+
+        .hashtag {
+          background-image: url("../../../assets/icons/wsm/hashtag-hover.svg");
+        }
+
+        span {
+          font-weight: 700;
+          color: $accent;
+        }
+
+        .new-message-count {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  details {
+    position: relative;
+  }
+
+  .messagesChannels {
+    padding: 0 $list-pr 2rem 1.875rem;
+
+    @media (width < 716px) {
+      padding: 0 $list-pr-716 0 1.875rem;
+    }
+
+    @media (width < 426px) {
+      padding: 0 calc($list-pr-716 + 1.25rem) 0 2.875rem;
+    }
+  }
+
+  .channels {
+    @include flex(space-between, center);
+    width: 100%;
+    padding: 0 $list-pr 0 1.875rem;
+
+    @media (width < 716px) {
+      padding: 0 $list-pr-716 0 1.875rem;
+    }
+
+    @media (width < 426px) {
+      padding: 0 calc($list-pr-716 + 1.25rem) 0 2.875rem;
+    }
+
+    > details {
+      width: 100%;
+
+      > summary {
+        width: 100%;
+
+        > div {
+          justify-content: space-between;
+          width: 100%;
+
+          > div {
+            @include flex(flex-start, center);
+            gap: $wsm-gap;
+          }
+        }
+      }
+    }
+
+    .channel-list li {
+      margin-bottom: 0.25rem;
+    }
+
+    .add-channel-btn {
+      position: relative;
+      all: unset;
+      @include flex(flex-start, center);
+      min-width: 2.5rem;
+      @include background-properties;
+      background-image: url("../../../assets/icons/wsm/add-channel-1.svg");
+      border-radius: 1.25rem;
+    }
+
+    .add-channel-btn:hover {
+      background-image: url("../../../assets/icons/wsm/add-channel-1-hover.svg");
+      background-color: #eceefe;
+      cursor: pointer;
+    }
+  }
+
+  summary {
+    position: relative;
+    @include flex(flex-start, center);
+    gap: $wsm-gap;
+    width: 100%;
+    list-style: none;
+    cursor: pointer;
+
+    .ws-channels {
+      background-image: url("../../../assets/icons/wsm/ws-channels.svg");
+      @include background-properties;
+    }
+
+    .dm-symbol {
+      min-width: 2.5rem;
+      height: 2.5rem;
+      background-image: url("../../../assets/icons/wsm/dm-symbol.svg");
+      @include background-properties;
+    }
+
+    > div {
+      @include flex(flex-start, center);
+
+      gap: 0.9375rem;
+    }
+  }
+
+  summary:hover::before {
+    background-image: url("../../../assets/icons/wsm/dropdown-hover.svg");
+    background-repeat: no-repeat;
+  }
+
+  summary:hover {
+    > div > div > .ws-channels {
+      background-image: url("../../../assets/icons/wsm/ws-channels-hover.svg");
+    }
+
+    > .dm-symbol {
+      background-image: url("../../../assets/icons/wsm/dm-symbol-hover.svg");
+    }
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::before {
+    content: "";
+    display: inline-block;
+    transform: rotate(-90deg);
+    width: 1rem;
+    height: 1rem;
+    background-image: url("../../../assets/icons/wsm/dropdown.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  details[open] summary::before {
+    transform: rotate(0deg);
+  }
+
+  button {
+    @include flex(flex-start, center);
+    text-align: center;
+    line-height: normal;
+    margin-left: $chnl-ml;
+    padding: 0.25rem 1.25rem 0.25rem 0.25rem;
+    // padding: 0.25rem 1.25rem 0.25rem $add-chnl-btn-pl;
+    gap: $chnl-gap;
+
+    &:hover span {
+      font-weight: 700;
+      color: $accent;
+    }
+
+    > .add-channel-2 {
+      background-image: url("../../../assets/icons/wsm/add-channel-2.svg");
+      @include background-properties;
+    }
+
+    span {
+      text-wrap: nowrap;
+    }
+  }
+
+  button:hover {
+    cursor: pointer;
+
+    > .add-channel-2 {
+      background-image: url("../../../assets/icons/wsm/add-channel-2-hover.svg");
+      @include background-properties;
+    }
+  }
+
+  .dm-list-item {
+    @include flex(flex-start, center);
+    @include buttonNoBorder;
+    @include nunito(1.125, 400, black);
+    gap: $dm-item-gap !important;
+    margin-bottom: 0.25rem;
+    color: black !important;
+
+    &:hover span {
+      font-weight: 700;
+      color: $secondary;
+    }
+
+    span {
+      text-align: left;
+    }
+  }
+
+  .dm-list-item:hover {
+    @include nunito(1.125, 400, black);
+  }
+
+  .dm-list-item:active {
+    @include nunito(1.125, 700, #535af1);
+  }
+
+  .avatar {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  details {
+    overflow: hidden;
+    transition: height 0.25s ease-out, opacity 0.25s ease-out;
+  }
+
+  details:not([open]) {
+    height: 2.5rem;
+  }
+
+  summary {
+    height: 2.5rem;
+  }
+}

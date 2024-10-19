@@ -1,13 +1,26 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
 import { routes } from './app.routes';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
-import { getStorage, provideStorage } from '@angular/fire/storage';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimationsAsync(), provideFirebaseApp(() => initializeApp({"projectId":"dabubble-bela-schramm","appId":"1:598525654175:web:495a472052f2a357a61eaa","storageBucket":"dabubble-bela-schramm.appspot.com","apiKey":"AIzaSyBP1mW7yRMYVouwQqUTWbtdNKdGDkj1btA","authDomain":"dabubble-bela-schramm.firebaseapp.com","messagingSenderId":"598525654175"})), provideAuth(() => getAuth()), provideFirestore(() => getFirestore()), provideStorage(() => getStorage())]
+  providers: [
+    provideRouter(routes),
+    provideFirebaseApp(() =>
+      initializeApp({
+        projectId: 'dabubble-303',
+        appId: '1:1022226466324:web:635cc005dcb75daad10901',
+        storageBucket: 'dabubble-303.appspot.com',
+        apiKey: 'AIzaSyAD6_zJLwvEEll3FpZY_ovzJT78G9kBFAY',
+        authDomain: 'dabubble-303.firebaseapp.com',
+        messagingSenderId: '1022226466324',
+      })
+    ),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
+  ],
 };

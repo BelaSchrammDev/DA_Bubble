@@ -1,0 +1,261 @@
+@import "../../../../styles.scss";
+@import "../../../../mixins.scss";
+
+.searchbar-open {
+  box-shadow: $profile-box-shadow;
+}
+
+.searchbar {
+  position: absolute;
+  z-index: 15;
+  left: 50%;
+  top: -1.875rem;
+  transform: translateX(-50%);
+  width: 100%;
+  @include flex(flex-start, flex-start);
+  flex-direction: column;
+  flex-shrink: 0;
+  flex-grow: 0;
+  padding: 1.125rem;
+  border-radius: 1.875rem;
+  background-color: #fff;
+  transition: $transition-standard;
+
+  @media (width < 426px) {
+    border-radius: 0;
+  }
+
+  input {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .datepicker-icon {
+    position: absolute;
+    z-index: 20;
+    top: 0.75rem;
+    right: 0.75rem;
+    @include flex(center, center);
+    flex-shrink: 0;
+    width: 2.125rem;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+    transition: $transition-standard;
+
+    &:hover {
+      background-color: $background;
+    }
+
+    &:hover img {
+      content: url("../../../../assets/icons/modals/calendar-search-hover.svg");
+    }
+
+    img {
+      width: 1.5rem;
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  .datepicker {
+    position: relative;
+    top: 1.125rem;
+    left: calc(100% - 18rem);
+    width: 0;
+    height: 0;
+  }
+
+  .search-blocks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+
+    &.context-active {
+      margin: 0.5rem 0;
+    }
+
+    .search-block-item {
+      display: flex;
+      align-items: center;
+      background-color: $background;
+      padding: 0.25rem 0.5rem;
+      border-radius: 1rem;
+      color: $accent;
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+
+      button.remove-context {
+        @include flex(flex-start, center);
+        margin-left: 0.25rem;
+        padding: 0;
+        background: none;
+        border: none;
+
+        &:hover img {
+          border-color: $error;
+          content: url("../../../../assets/icons/modals/close-search-item-hover.svg");
+        }
+
+        img {
+          width: 1.25rem;
+          aspect-ratio: 1 / 1;
+          padding: 0.125rem;
+          border-radius: 50%;
+          border: $active-border;
+        }
+      }
+    }
+  }
+
+  .autocomplete-suggestions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    max-height: 200px;
+    overflow-y: auto;
+
+    .suggestion-item {
+      @include flex(flex-start, center);
+      gap: 0.25rem;
+      width: fit-content;
+      padding: 0.5rem;
+      cursor: pointer;
+      transition: $transition-standard;
+
+      &:hover {
+        background-color: $background;
+        color: $accent;
+        font-weight: 700;
+        padding: 0.5rem 0.825rem;
+        border-radius: $circled-border-radius;
+      }
+
+      &:hover .item-action {
+        opacity: 1;
+      }
+
+      .item-action {
+        opacity: 0;
+      }
+
+      .message-item {
+        @include flex(flex-start, center);
+        gap: 0.5rem;
+        transition: $transition-standard;
+
+        .message-icon {
+          width: 1.5rem;
+          aspect-ratio: 1 / 1;
+        }
+
+        .message-content {
+          font-weight: 400 !important;
+          strong {
+            color: $accent !important;
+          }
+        }
+      }
+    }
+  }
+
+  .dropdown {
+    z-index: 10;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 0.25rem;
+    transition: $transition-standard;
+
+    .context-search {
+      width: fit-content;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: $transition-standard;
+
+      &:hover {
+        padding: 0.5rem 0.825rem;
+        border-radius: $circled-border-radius;
+        border: 1px solid $primary;
+        color: $primary;
+        font-weight: 700;
+      }
+
+      &:active {
+        background-color: $background;
+        color: $accent;
+      }
+    }
+
+    .recent-searches {
+      .category-header {
+        padding: 0.5rem;
+        font-weight: bold;
+      }
+
+      .recent-search-items {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        width: fit-content;
+        padding: 0.5rem;
+        cursor: pointer;
+        transition: $transition-standard;
+
+        &:hover {
+          padding: 0.5rem 0.825rem;
+          background-color: $background;
+          border-radius: $circled-border-radius;
+          color: $accent;
+          font-weight: 700;
+        }
+
+        &:hover img.search-history-icon {
+          filter: none;
+        }
+
+        &:hover .item-action {
+          opacity: 1;
+        }
+
+        .item-action {
+          opacity: 0;
+        }
+
+        img.search-history-icon {
+          height: 1.5rem;
+          width: 1.5rem;
+          filter: saturate(0) brightness(1.5);
+        }
+
+        button {
+          background: none;
+          border: none;
+          cursor: pointer;
+          color: $error;
+        }
+      }
+    }
+  }
+
+  ::-webkit-calendar-picker-indicator {
+    background: $background;
+    border-radius: 4px;
+    border: none;
+    font-family: "Nunito", sans-serif;
+
+    color: $primary;
+  }
+
+  .date-picker::-webkit-datetime-edit-fields-wrapper {
+    border-radius: 8px;
+    border: 1px solid #adb0d9;
+    font-family: "Nunito", sans-serif;
+  }
+
+  .date-picker::-webkit-datetime-edit {
+    display: none;
+  }
+}

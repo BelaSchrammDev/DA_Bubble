@@ -1,25 +1,8 @@
-section {
-    max-height: 100dvh;
-    height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: var(--main-spacing);
+@import "../mixins.scss";
 
-    .main-section {
-        max-height: calc(100dvh - var(--header-height) - var(--main-spacing) - var(--main-spacing) - var(--main-spacing));
-        flex-grow: 1;
-        display: flex;
-        justify-content: flex-start;
-        align-items: stretch;
-    }
-}
-
-app-channelview {
-    flex-grow: 1;
-}
-
-app-header {
-    height: 100px;
+.start-page {
+  @include flex(center, center);
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #eceefe;
 }

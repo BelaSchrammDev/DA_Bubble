@@ -1,0 +1,54 @@
+@import "../../../../styles.scss";
+@import "../../../../mixins.scss";
+
+:host {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1.25rem;
+  height: 100%;
+  padding-top: 0.625rem;
+  overflow: scroll;
+}
+
+:host(.default-channel) {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  @include flex(center, normal);
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.new-messages {
+  @include flex(center, center);
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.625rem 1.25rem;
+
+  div {
+    height: 2px;
+    flex-grow: 1;
+    background-color: $secondary;
+  }
+
+  span {
+    @include nunito(1, 400, $secondary);
+  }
+}
+
+@keyframes colorChange {
+  0% {
+    background: $primary;
+  }
+
+  100% {
+    background: #fff;
+  }
+}
+
+.color-change {
+  animation: colorChange 1.5s linear alternate both;
+}
