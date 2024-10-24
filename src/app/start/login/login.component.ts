@@ -439,11 +439,14 @@ export class LoginComponent implements OnDestroy, OnInit {
       this.errorPassword = 'Falsches Passwort.';
     } else if (error.includes('auth/popup-closed-by-user')) {
       this.errorGoogleSignin = 'Anmeldung durch Benutzer abgebrochen.';
+    } else if (error.includes('auth/invalid-credential')) {
+      this.errorEmail = 'Benutzer oder Passwort falsch.';
     } else if (error.includes('auth/google-signin-error-name-email-missing')) {
       this.errorGoogleSignin =
-        'Anmeldung fehlgeschlagen. Name & E-Mail unbekannt.';
+      'Anmeldung fehlgeschlagen. Name & E-Mail unbekannt.';
     }
     console.clear();
+    console.log('Error: ' + error);
   }
 
   /**
